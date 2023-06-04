@@ -1,13 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Logged from "../../../components/layouts/Logged";
-import { getCookie } from "cookies-next";
+import { getData } from "../../../utils/fetch";
 
 const Mytask = () => {
-  const [groups, setgroups] = useState([]);
-  const token = getCookie("token");
+  const [groups, setgroups] = useState<any[]>([]);
 
-  const gettasksgroup = async () => {};
+  const gettasksgroup = async () => {
+    const result = await getData("/api/v1/mytaskgroups")
+    if (result.status === 200) {
+      setgroups(result.data)
+    }
+  };
   useEffect(() => {
     gettasksgroup();
   }, []);
@@ -26,7 +30,7 @@ const Mytask = () => {
                   {data.name}
                 </div>
                 <div className="space-y-3 mt-2">
-                  {data.Task.map((task) => (
+                  {data.Task.map((task: any) => (
                     <div key={task.id} className="bg-white rounded-md p-2">
                       <div>{task.title}</div>
                       <p>{task.desc}</p>

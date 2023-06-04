@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import cookies from "js-cookie";
 
 export const ErrorHandlerAPI = (error: any) => {
   if (
@@ -9,7 +9,7 @@ export const ErrorHandlerAPI = (error: any) => {
     error?.response?.data?.message === "Authentication invalid" ||
     error?.response?.data?.message === "invalid algorithm"
   ) {
-    // Cookies.remove("token");
+    cookies.remove("token");
     console.log("token di hapus");
     
     return error.response;

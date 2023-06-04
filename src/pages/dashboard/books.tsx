@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Logged from "../../components/layouts/Logged";
-import { getCookie } from "cookies-next";
-import axios from "axios";
-import Image from "next/image";
+import { getData } from "../../utils/fetch";
 
-
-const apihost = process.env.API_HOST;
 const Books = () => {
-  const [books, setbooks] = useState([]);
-  const token = getCookie("token");
+  const [books, setbooks] = useState<any[]>([]);
 
   async function getBooks() {
-    var config = {
-      method: "GET",
-      url: apihost + "/api/v1/books",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      const response = await axios(config);
-      setbooks(response.data);
-      console.log(books);
-    } catch (error) {
-      console.error(error);
+    const response = await getData("/api/v1/books")
+    if (response.status) {
+      setbooks(response.data)
     }
   }
   useEffect(() => {
@@ -44,7 +28,7 @@ const Books = () => {
               className="w-full shadow-xl bg-white rounded-lg mt-4"
             >
               <figure className="px-10 pt-10">
-                <Image
+                <img
                   src="https://placeimg.com/400/225/arch"
                   alt="Shoes"
                   className="rounded-xl"

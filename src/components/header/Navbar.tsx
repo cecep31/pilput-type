@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
@@ -10,9 +9,6 @@ const navigation = [
 ];
 
 export default function Navigation() {
-  const [token, settoken] = useState("");
-
-
   return (
     <header className="z-30 flex items-center w-full sm:h-24">
       <div className="container flex items-center justify-between px-6 mx-auto">

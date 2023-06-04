@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "../../components/header/Navbar";
 import Postlist from "../../components/post/Postlist";
 import Postlistpulse from "../../components/post/postlistpulse";
@@ -13,7 +13,6 @@ interface Post {
 
 const Blog = () => {
   const [posts, setposts] = useState<Post[]>([]);
-  const apihost = process.env.NEXT_PUBLIC_API_HOST;
   async function getPosts() {
      const response = await getData("/api/v1/posts")
      setposts(response.data)

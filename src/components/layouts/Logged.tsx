@@ -9,10 +9,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { getData } from "../../utils/fetch";
 
-interface Propdata {
-  children: React.ReactNode;
-}
-
 interface YourData {
   name: string;
   username: string;
@@ -22,7 +18,7 @@ interface YourData {
 const Logged = ({ children }: { children: React.ReactNode }) => {
   const [yourdata, setyourdata] = useState<YourData>({
     name: "Loading...",
-    image: "/",
+    image: "placeholder/spinner.gif",
     username: "Loading...",
   });
   
@@ -93,7 +89,7 @@ const Logged = ({ children }: { children: React.ReactNode }) => {
 
                 <Link
                   className={`w-full font-thin uppercase flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
-                  to="/dashboard/manage-user"
+                  to="/dashboard/user-management"
                 >
                   <span className="text-left">
                     <svg

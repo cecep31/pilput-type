@@ -5,7 +5,6 @@ import { getToken } from "./Auth";
 
 const baseurl = process.env.NEXT_PUBLIC_API_HOST;
 const token = getToken()
-console.log(token);
 
 const axiosIntence = axios.create({
   baseURL: baseurl,
@@ -23,10 +22,8 @@ export async function getDataExternal(url:string, params: any) {
   }
 }
 
-export async function getData(url:string, params?: any): Promise<any> {
+export async function getData(url:string): Promise<any> {
   try {
-    console.log(token);
-    
     return await axiosIntence.get(`${baseurl}${url}`);
   } catch (error) {
     ErrorHandlerAPI(error)
@@ -101,9 +98,8 @@ export function postDataRQ(url:any, payload:any, formData = false) {
     return ErrorHandlerAPI(error);
   }
 }
-export function getDataRQ(url:string, params:any) {
+export function getDataRQ(url:string) {
   try {
-    const token = getToken()
     return axiosIntence.get(`${baseurl}${url}`);
   } catch (error) {
     return ErrorHandlerAPI(error);

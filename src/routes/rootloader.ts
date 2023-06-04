@@ -7,5 +7,5 @@ export async function loader() {
         return redirect("/login")
     }
     return null
-   
-  }
+
+}

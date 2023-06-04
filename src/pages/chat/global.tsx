@@ -1,27 +1,20 @@
-import { getCookie } from "cookies-next";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import Link from "next/link";
-import { cookies } from 'next/headers';
+import { Link } from "react-router-dom";
 
+import cookies from "js-cookie";
 
 const Global = () => {
-  const cookiesStore = cookies()
-  const tokenformcookies = cookiesStore.get("token");
-  if (tokenformcookies) {
-    const tokenval = tokenformcookies;
-  }else{
-    const tokenval = "";
-  }
+  const tokenval = cookies.get("token");
   const [socketUrl, setSocketUrl] = useState(
     process.env.NEXT_PUBLIC_WS_HOST + "/ws/global"
   );
-  const [messageHistory, setMessageHistory] = useState([]);
+  const [messageHistory, setMessageHistory] = useState<any[]>([]);
   const [message, setmessage] = useState("");
 
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
     queryParams: {
-      token: tokenval,
+      token: tokenval || '',
     },
   });
 
@@ -34,12 +27,12 @@ const Global = () => {
   }, [lastMessage]);
 
   const handleClickChangeSocketUrl = () => {
-    setSocketUrl("wss://google.com")
+    setSocketUrl("wss://google.com");
     setSocketUrl(process.env.NEXT_PUBLIC_WS_HOST + "/ws/global");
     console.log("reconnect seharusnya");
   };
-  
-  async function handleClickSendMessage(event) {
+
+  async function handleClickSendMessage(event: React.FormEvent) {
     event.preventDefault();
     await sendMessage(message);
     setmessage("");
@@ -56,7 +49,7 @@ const Global = () => {
   return (
     <div className="absolute top-0 bottom-0 right-0 left-0 mx-auto px-10 py-10">
       <div>
-        <Link href="/">Back to home page</Link>
+        <Link to="/">Back to home page</Link>
       </div>
       <button
         className="p-2 bg-green-300 rounded-lg hover:bg-green-600"

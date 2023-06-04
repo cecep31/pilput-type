@@ -1,21 +1,16 @@
-"use client";
 import React, { useState, useEffect } from "react";
-import { getCookie } from "cookies-next";
 import Logged from "../../../components/layouts/Logged";
-import Image from "next/image";
-import axios from "axios";
 import Modal from "../../../components/user/Modal";
-import { getData,deleteData } from "../../../utils/fetch";
-
+import { getData, deleteData } from "../../../utils/fetch";
 
 const apihost = process.env.NEXT_PUBLIC_API_HOST;
 
 const ManageUser = () => {
-  const [users, setusers] = useState([]);
-  const [username, setusername] = useState();
-  const [email, setemail] = useState();
-  const [password, setpassword] = useState();
-  const [repassword, setrepassword] = useState();
+  const [users, setusers] = useState<any[]>([]);
+  const [username, setusername] = useState<string>();
+  const [email, setemail] = useState<string>();
+  const [password, setpassword] = useState<string>();
+  const [repassword, setrepassword] = useState<string>();
   const [modaluser, setmodaluser] = useState(false);
   const hoststorage = process.env.NEXT_PUBLIC_STORAGE;
 
@@ -24,15 +19,20 @@ const ManageUser = () => {
   }, []);
 
   async function getUsers() {
-    let response = await getData("/api/v1/users");
+    const response = await getData("/api/v1/users");
     console.log(response.status);
     if (response.status >= 200 && response.status <= 299) {
       setusers(response.data);
     }
   }
 
-  async function deleteUser(id) {
-    const response = await deleteData(apihost+"/api/v1/users/"+id)
+  async function deleteUser(id: string) {
+    const response = await deleteData(apihost + "/api/v1/users/" + id);
+    if (response.status === 200) {
+      alert("Succes delete user");
+    } else {
+      alert("Failed delete user");
+    }
   }
 
   function showModaluser() {
@@ -43,9 +43,8 @@ const ManageUser = () => {
     setmodaluser(false);
   }
 
-  async function submitHandler(e) {
+  async function submitHandler(e: React.FormEvent) {
     e.preventDefault();
-    
     getUsers();
   }
 
@@ -108,15 +107,15 @@ const ManageUser = () => {
                         <div className="flex items-center">
                           <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
                             {user.image ? (
-                              <Image
+                              <img
                                 className="rounded-full"
-                                src={hoststorage+user.image}
+                                src={hoststorage + user.image}
                                 width="40"
                                 height="40"
-                                alt="Philip Harbach" unoptimized
+                                alt="Philip Harbach"
                               />
                             ) : (
-                              <Image
+                              <img
                                 className="rounded-full"
                                 src="https://placeimg.com/640/480/any"
                                 width="40"
@@ -191,7 +190,7 @@ const ManageUser = () => {
               <input
                 type="text"
                 value={username}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setusername(e.target.value);
                 }}
                 placeholder="User Name"
@@ -204,7 +203,8 @@ const ManageUser = () => {
               </label>
               <input
                 type="email"
-                onChange={(e) => {
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setemail(e.target.value);
                 }}
                 required
@@ -218,6 +218,7 @@ const ManageUser = () => {
                 Password
               </label>
               <input
+              value={password}
                 type="password"
                 onChange={(e) => {
                   setpassword(e.target.value);
@@ -232,6 +233,7 @@ const ManageUser = () => {
               </label>
               <input
                 required
+                value={repassword}
                 type="password"
                 onChange={(e) => {
                   setrepassword(e.target.value);
@@ -243,7 +245,7 @@ const ManageUser = () => {
 
             <div>
               <button
-                type="Submit"
+                type="submit"
                 className="btn hover:shadow-form rounded-md bg-[#6A64F1] py-2 px-8 text-base font-semibold text-white outline-none"
               >
                 Submit
@@ -261,6 +263,6 @@ const ManageUser = () => {
       )}
     </Logged>
   );
-}
+};
 
 export default ManageUser;
