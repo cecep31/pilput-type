@@ -4,12 +4,11 @@ import { getToken } from "./Auth";
 
 
 const baseurl = process.env.NEXT_PUBLIC_API_HOST;
-const token = getToken()
 
 const axiosIntence = axios.create({
   baseURL: baseurl,
   headers:{
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${getToken()}`
   }
 })
 
@@ -22,9 +21,15 @@ export async function getDataExternal(url:string, params: any) {
   }
 }
 
-export async function getData(url:string): Promise<any> {
+export async function getData(url:string, formData?: any): Promise<any> {
   try {
-    return await axiosIntence.get(`${baseurl}${url}`);
+    const token = getToken()
+    return await axios.get(`${baseurl}${url}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": formData ? "multipart/form-data" : "application/json",
+      },
+    });
   } catch (error) {
     ErrorHandlerAPI(error)
     return error

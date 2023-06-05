@@ -11,7 +11,6 @@ export const ErrorHandlerAPI = (error: any) => {
   ) {
     cookies.remove("token");
     console.log("token di hapus");
-    
     return error.response;
   }
   console.log("tone ngk di hapus");
