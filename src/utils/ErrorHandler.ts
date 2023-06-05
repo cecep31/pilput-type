@@ -14,6 +14,5 @@ export const ErrorHandlerAPI = (error: any) => {
     return error.response;
   }
   console.log("tone ngk di hapus");
-  
   return error.response;
 };

@@ -100,9 +100,9 @@ const ManageUser = () => {
                 </tr>
               </thead>
               <tbody className="text-sm divide-y divide-gray-100">
-                {users.map((user, key) => {
+                {users.map((user) => {
                   return (
-                    <tr key={key}>
+                    <tr key={user.id}>
                       <td className="p-2 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">

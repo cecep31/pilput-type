@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 import Logged from "../../../components/layouts/Logged";
 import { getData } from "../../../utils/fetch";
