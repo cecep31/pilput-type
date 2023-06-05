@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useMatch } from "react-router-dom";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
@@ -8,6 +8,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { getData } from "../../utils/fetch";
+
 
 interface YourData {
   name: string;
@@ -21,7 +22,7 @@ const Logged = ({ children }: { children: React.ReactNode }) => {
     image: "placeholder/spinner.gif",
     username: "Loading...",
   });
-  
+
   const storage = process.env.NEXT_PUBLIC_STORAGE;
 
   function logout() {
@@ -34,119 +35,88 @@ const Logged = ({ children }: { children: React.ReactNode }) => {
       setyourdata(response.data);
     }
   }
+  const indashboard = useMatch("dashboard");
+  const indashboardmytask = useMatch("dashboard/mytask");
   useEffect(() => {
     getyourdata();
+    console.log(indashboard);
+    console.log(indashboardmytask);
   }, []);
 
   return (
-    <main className="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden relative">
+    <main className="relative h-screen overflow-hidden bg-gray-100 dark:bg-gray-800">
       <div className="flex items-start justify-between">
-        <div className="flex-none h-screen lg:block shadow-lg relative md:w-40 lg:w-64">
-          <div className="bg-white h-full rounded-lg dark:bg-gray-700">
-            <div className="flex items-center justify-center pt-6 font-bold text-3xl text-gray-700">
-              <Link to="/">
+        <div className="relative hidden h-screen shadow-lg lg:block w-80   ">
+          <div className="flex h-full flex-col flex-1 space-y-1 bg-zinc-800 dark:bg-gray-700 text-gray-200 p-2 text-sm">
+            <div className="flex justify-center my-5">
+              <Link to="/" className="rounded-xl">
                 <img src="/pilput.png" alt="pilput" height="50" width="100" />
               </Link>
             </div>
-            <nav className="mt-6">
-              <div>
-                <Link
-                  className={`w-full font-thin uppercase  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
-                  to="/dashboard"
+            <nav className="overflow-y-auto flex flex-1 flex-col border-b border-white/50">
+              <Link
+                to="/dashboard"
+                className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  viewBox="0 0 2048 1792"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <span className="text-left">
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      viewBox="0 0 2048 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z"></path>
-                    </svg>
-                  </span>
-                  <span className="mx-4 text-sm font-normal">Dashboard</span>
-                </Link>
+                  <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z"></path>
+                </svg>
+                <span className="mx-2 text-gray-200 font-normal">
+                  Dashboard
+                </span>
+              </Link>
 
-                <Link
-                  className={`w-full font-thin uppercase   flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
-                  to="/dashboard/mytask"
+              <Link
+                to="/dashboard/user-management"
+                className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
                 >
-                  <span className="text-left">
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      className="m-auto"
-                      viewBox="0 0 2048 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M685 483q16 0 27.5-11.5t11.5-27.5-11.5-27.5-27.5-11.5-27 11.5-11 27.5 11 27.5 27 11.5zm422 0q16 0 27-11.5t11-27.5-11-27.5-27-11.5-27.5 11.5-11.5 27.5 11.5 27.5 27.5 11.5zm-812 184q42 0 72 30t30 72v430q0 43-29.5 73t-72.5 30-73-30-30-73v-430q0-42 30-72t73-30zm1060 19v666q0 46-32 78t-77 32h-75v227q0 43-30 73t-73 30-73-30-30-73v-227h-138v227q0 43-30 73t-73 30q-42 0-72-30t-30-73l-1-227h-74q-46 0-78-32t-32-78v-666h918zm-232-405q107 55 171 153.5t64 215.5h-925q0-117 64-215.5t172-153.5l-71-131q-7-13 5-20 13-6 20 6l72 132q95-42 201-42t201 42l72-132q7-12 20-6 12 7 5 20zm477 488v430q0 43-30 73t-73 30q-42 0-72-30t-30-73v-430q0-43 30-72.5t72-29.5q43 0 73 29.5t30 72.5z"></path>
-                    </svg>
-                  </span>
-                  <span className="mx-4 text-sm font-normal">My tasks</span>
-                </Link>
+                  <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
+                </svg>
 
-                <Link
-                  className={`w-full font-thin uppercase flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
-                  to="/dashboard/user-management"
+                <span className="mx-2 text-gray-200 font-normal">
+                  User management
+                </span>
+              </Link>
+              <Link
+                to="/dashboard/mytask"
+                className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6"
                 >
-                  <span className="text-left">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
-                    </svg>
-                  </span>
-                  <span className="mx-4 text-sm font-normal">Manage user</span>
-                </Link>
-                <Link
-                  className="w-full font-thin uppercase flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800"
-                  to="#"
-                >
-                  <span className="text-left">
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      className="m-auto"
-                      viewBox="0 0 2048 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M1024 1131q0-64-9-117.5t-29.5-103-60.5-78-97-28.5q-6 4-30 18t-37.5 21.5-35.5 17.5-43 14.5-42 4.5-42-4.5-43-14.5-35.5-17.5-37.5-21.5-30-18q-57 0-97 28.5t-60.5 78-29.5 103-9 117.5 37 106.5 91 42.5h512q54 0 91-42.5t37-106.5zm-157-520q0-94-66.5-160.5t-160.5-66.5-160.5 66.5-66.5 160.5 66.5 160.5 160.5 66.5 160.5-66.5 66.5-160.5zm925 509v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm0-260v-56q0-15-10.5-25.5t-25.5-10.5h-568q-15 0-25.5 10.5t-10.5 25.5v56q0 15 10.5 25.5t25.5 10.5h568q15 0 25.5-10.5t10.5-25.5zm0-252v-64q0-14-9-23t-23-9h-576q-14 0-23 9t-9 23v64q0 14 9 23t23 9h576q14 0 23-9t9-23zm256-320v1216q0 66-47 113t-113 47h-352v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-768v-96q0-14-9-23t-23-9h-64q-14 0-23 9t-9 23v96h-352q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1728q66 0 113 47t47 113z"></path>
-                    </svg>
-                  </span>
-                  <span className="mx-4 text-sm font-normal">Reports</span>
-                </Link>
-                <Link
-                  className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  to="/dashboard/settings"
-                >
-                  <span className="text-left">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                  <span className="mx-4 text-sm font-normal">Settings</span>
-                </Link>
-              </div>
+                  <path d="M5.566 4.657A4.505 4.505 0 016.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0015.75 3h-7.5a3 3 0 00-2.684 1.657zM2.25 12a3 3 0 013-3h13.5a3 3 0 013 3v6a3 3 0 01-3 3H5.25a3 3 0 01-3-3v-6zM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 016.75 6h10.5a3 3 0 012.683 1.657A4.505 4.505 0 0018.75 7.5H5.25z" />
+                </svg>
+
+                <span className="mx-2 text-gray-200 font-normal">Task</span>
+              </Link>
             </nav>
+
+            <Link
+              to="/"
+              className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg"
+            >
+              <HomeIcon className="h-4 w-4" />
+              <span>Back To Home</span>
+            </Link>
           </div>
         </div>
-        <div className="flex flex-col w-full h-screen pl-0 md:p-4 md:space-y-4">
-          <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-lg z-20">
+        <div className="flex flex-col relative w-full h-screen p-3 bg-stone-300">
+          <header className="w-full shadow-md bg-white dark:bg-gray-700 items-center h-16 rounded-md z-20">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
               <div className="relative items-center pl-1 flex w-full sm:pr-2 sm:ml-0">
                 <div className="container relative left-0 z-50 flex w-3/4 h-full">
@@ -243,7 +213,7 @@ const Logged = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
           </header>
-          <div className="overflow-hidden w-full h-full pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0 text-gray-600">
+          <div className="h-full mt-2 p-3 bg-gray-100 shadow-md border rounded">
             {children}
           </div>
         </div>

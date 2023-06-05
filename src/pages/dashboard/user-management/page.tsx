@@ -50,11 +50,8 @@ const ManageUser = () => {
 
   return (
     <Logged>
-      <div className="bg-white p-5 rounded-xl shadow-lg">
-        <h1>Manage user</h1>
-      </div>
-      <div className="w-full h-full mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
-        <header className="px-5 py-4 border-b border-gray-100">
+      <div className="">
+        <header className="px-5 py-4 border-b border-gray-100 h-full">
           <span className="font-semibold text-gray-800">Users</span>
           <button
             className="ml-3 bg-green-600 text-white py-2 px-4 rounded-xl hover:bg-green-700"
@@ -218,7 +215,7 @@ const ManageUser = () => {
                 Password
               </label>
               <input
-              value={password}
+                value={password}
                 type="password"
                 onChange={(e) => {
                   setpassword(e.target.value);

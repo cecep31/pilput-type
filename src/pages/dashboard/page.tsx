@@ -5,7 +5,7 @@ export default function Dashboard() {
   return (
     <>
       <Logged>
-        <div className="min-h-screen bg-white rounded-lg p-3">
+        <div className="">
           <Link className="text-blue-500" to="/">
             Home
           </Link>
