@@ -19,7 +19,6 @@ const ManageUser = () => {
 
   async function getUsers() {
     const response = await getData("/api/v1/users");
-    console.log(response.status);
     if (response.status >= 200 && response.status <= 299) {
       setusers(response.data);
     }

@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import {postDatanoauth} from '../../utils/fetch'
-import {Link, useNavigate} from "react-router-dom";
+import { postDatanoauth } from "../../utils/fetch";
+import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../components/modal/Loading";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export default function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [username, setusername] = useState("guest");
   const [password, setpassword] = useState("guest");
   const [loginwait, setloginwait] = useState(false);
@@ -14,22 +14,24 @@ export default function Login() {
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setloginwait(true);
-    const data = ({
+    const data = {
       username: username,
       password: password,
-    });
-    const response = await postDatanoauth("/api/auth/login",data)
+    };
+    const response = await postDatanoauth("/api/auth/login", data);
     if (response.status === 200) {
       console.log(response);
       // nookies.set(null, "token", response.data.data);
-      Cookies.set("token", response.data.access_token);
+      Cookies.set("token", response.data.access_token, {
+        secure: true,
+        sameSite: "Strict",
+      });
       setloginwait(false);
-      navigate("/dashboard")
-    }else{
+      navigate("/dashboard");
+    } else {
       setloginwait(false);
-      alert("Wrong username or passowrd")
+      alert("Wrong username or passowrd");
     }
-    
   }
 
   return (

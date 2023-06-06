@@ -10,9 +10,7 @@ export const ErrorHandlerAPI = (error: any) => {
     error?.response?.data?.message === "invalid algorithm"
   ) {
     cookies.remove("token");
-    console.log("token di hapus");
     return error.response;
   }
-  console.log("tone ngk di hapus");
   return error.response;
 };

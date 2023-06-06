@@ -20,7 +20,6 @@ const Global = () => {
 
   useEffect(() => {
     if (lastMessage !== null) {
-      console.log(lastMessage);
       setMessageHistory((prev) => prev.concat(lastMessage));
     }
     // console.log(messageHistory);
@@ -29,7 +28,6 @@ const Global = () => {
   const handleClickChangeSocketUrl = () => {
     setSocketUrl("wss://google.com");
     setSocketUrl(process.env.NEXT_PUBLIC_WS_HOST + "/ws/global");
-    console.log("reconnect seharusnya");
   };
 
   async function handleClickSendMessage(event: React.FormEvent) {

@@ -1,4 +1,4 @@
-import { Link, redirect, useMatch, Outlet } from "react-router-dom";
+import { Link, useNavigate, useMatch, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
@@ -11,6 +11,7 @@ import {
 import { getData } from "../../utils/fetch";
 
 
+const storage = process.env.NEXT_PUBLIC_STORAGE;
 interface YourData {
   name: string;
   username: string;
@@ -18,17 +19,16 @@ interface YourData {
 }
 
 const Logged = () => {
+  const nagigate = useNavigate()
   const [yourdata, setyourdata] = useState<YourData>({
     name: "Loading...",
     image: "placeholder/spinner.gif",
     username: "Loading...",
   });
 
-  const storage = process.env.NEXT_PUBLIC_STORAGE;
-
   function logout() {
     Cookies.remove("token");
-    redirect("/");
+    nagigate("/");
   }
   async function getyourdata() {
     const response = await getData("/api/v1/profile");
@@ -36,12 +36,8 @@ const Logged = () => {
       setyourdata(response.data);
     }
   }
-  const indashboard = useMatch("dashboard");
-  const indashboardmytask = useMatch("dashboard/mytask");
   useEffect(() => {
     getyourdata();
-    console.log(indashboard);
-    console.log(indashboardmytask);
   }, []);
 
   return (
