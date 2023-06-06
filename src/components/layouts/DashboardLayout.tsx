@@ -9,6 +9,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { getData } from "../../utils/fetch";
+import { BellIcon } from "@heroicons/react/24/solid";
 
 
 const storage = process.env.NEXT_PUBLIC_STORAGE;
@@ -117,7 +118,7 @@ const Logged = () => {
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
               <div className="relative items-center pl-1 flex w-full sm:pr-2 sm:ml-0">
                 <div className="container relative left-0 z-50 flex w-3/4 h-full">
-                  <div className="relative flex items-center w-full lg:w-64 h-full group">
+                  {/* <div className="relative flex items-center w-full lg:w-64 h-full group">
                     <div className="absolute z-50 items-center justify-center block w-auto h-10 p-3 pr-2 text-sm text-gray-500 uppercase cursor-pointer sm:hidden">
                       <svg
                         fill="none"
@@ -143,11 +144,14 @@ const Logged = () => {
                     <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 rounded-2xl md:block">
                       +
                     </div>
+                  </div> */}
+                  <div className="flex items-center">
+                    Hello {yourdata.name}
                   </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
                   <span className="mr-4 font-semibold text-gray-700">
-                    {yourdata.name}
+                    <BellIcon className="h-6 fill-slate-500"/>
                   </span>
                   <Menu>
                     <Menu.Button>
@@ -210,7 +214,7 @@ const Logged = () => {
               </div>
             </div>
           </header>
-          <div className="h-full mt-2 p-3 bg-gray-100 shadow-md border rounded">
+          <div className="h-full mt-2 p-3 bg-gray-100 shadow-md border rounded overflow-y-auto">
             <Outlet />
           </div>
         </div>

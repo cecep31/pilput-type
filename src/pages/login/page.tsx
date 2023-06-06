@@ -21,10 +21,15 @@ export default function Login() {
     const response = await postDatanoauth("/api/auth/login", data);
     if (response.status === 200) {
       console.log(response);
+      const expire = new Date();
+
+      // Menambahkan 3 hari ke tanggal sekarang
+      expire.setDate(expire.getDate() + 3);
       // nookies.set(null, "token", response.data.data);
       Cookies.set("token", response.data.access_token, {
         secure: true,
         sameSite: "Strict",
+        expires: expire
       });
       setloginwait(false);
       navigate("/dashboard");

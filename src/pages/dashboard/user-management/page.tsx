@@ -48,8 +48,8 @@ const ManageUser = () => {
 
   return (
     <>
-      <div className="">
-        <header className="px-5 py-4 border-b border-gray-100 h-full">
+      <div className="min-h-screen">
+        <header className="px-5 py-4 border-b border-gray-100 ">
           <span className="font-semibold text-gray-800">Users</span>
           <button
             className="ml-3 bg-green-600 text-white py-2 px-4 rounded-xl hover:bg-green-700"
@@ -71,8 +71,8 @@ const ManageUser = () => {
             </svg>
           </button>
         </header>
-        <div className="p-3 h-full">
-          <div className="overflow-x-auto h-full">
+        <div className="p-3">
+          <div className="">
             <table className="table-auto w-full">
               <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                 <tr>
