@@ -1,11 +1,9 @@
-import Logged from '../../../components/layouts/DashboardLayout'
-
 const Setting = () => {
   return (
-    <Logged>
-      <div>Setting</div>
-    </Logged>
-  )
-}
+    <>
+      <div>Setting</div>;
+    </>
+  );
+};
 
-export default Setting
+export default Setting;
