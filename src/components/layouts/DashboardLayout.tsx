@@ -1,7 +1,8 @@
-import { Link, redirect, useMatch } from "react-router-dom";
+import { Link, redirect, useMatch, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
+
 import {
   ArrowLeftOnRectangleIcon,
   HomeIcon,
@@ -16,7 +17,7 @@ interface YourData {
   image: string;
 }
 
-const Logged = ({ children }: { children: React.ReactNode }) => {
+const Logged = () => {
   const [yourdata, setyourdata] = useState<YourData>({
     name: "Loading...",
     image: "placeholder/spinner.gif",
@@ -214,7 +215,7 @@ const Logged = ({ children }: { children: React.ReactNode }) => {
             </div>
           </header>
           <div className="h-full mt-2 p-3 bg-gray-100 shadow-md border rounded">
-            {children}
+            <Outlet />
           </div>
         </div>
       </div>

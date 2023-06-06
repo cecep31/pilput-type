@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Logged from "../../../components/layouts/Logged";
 import Modal from "../../../components/user/Modal";
 import { getData, deleteData } from "../../../utils/fetch";
 
@@ -49,7 +48,7 @@ const ManageUser = () => {
   }
 
   return (
-    <Logged>
+    <>
       <div className="">
         <header className="px-5 py-4 border-b border-gray-100 h-full">
           <span className="font-semibold text-gray-800">Users</span>
@@ -258,7 +257,7 @@ const ManageUser = () => {
           </form>
         </Modal>
       )}
-    </Logged>
+    </>
   );
 };
 

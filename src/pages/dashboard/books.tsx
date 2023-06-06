@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Logged from "../../components/layouts/Logged";
 import { getData } from "../../utils/fetch";
 
 const Books = () => {
@@ -15,7 +14,7 @@ const Books = () => {
     getBooks();
   }, []);
   return (
-    <Logged>
+    <>
       <div className="">
         <div className="bg-white rounded-lg shadow-md p-5">
           <h1>Books</h1>
@@ -47,7 +46,7 @@ const Books = () => {
           ))}
         </div>
       </div>
-    </Logged>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import Home from "../pages/page";
+import DashboardLayout from "../components/layouts/DashboardLayout";
 import Dashoboard from "../pages/dashboard/page";
 import Blogs from "../pages/blogs/page";
 import Counter from "../pages/counter";
@@ -18,14 +19,34 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashoboard />,
+    element: <DashboardLayout />,
     loader: loader,
+    children: [
+      {
+        path: "",
+        element: <Dashoboard />,
+      },
+      {
+        path: "user-management",
+        element: <UserManagement />,
+        loader: loader,
+      },
+      {
+        path: "mytask",
+        element: <Mytask />,
+      },
+    ],
   },
-  {
-    path: "dashboard/user-management",
-    element: <UserManagement />,
-    loader: loader,
-  },
+  // {
+  //   path: "dashboard",
+  //   element: <Dashoboard />,
+  //   loader: loader,
+  // },
+  // {
+  //   path: "dashboard/user-management",
+  //   element: <UserManagement />,
+  //   loader: loader,
+  // },
   {
     path: "blogs",
     element: <Blogs />,
@@ -42,8 +63,8 @@ export const router = createBrowserRouter([
     path: "chat",
     element: <Chat />,
   },
-  {
-    path: "dashboard/mytask",
-    element: <Mytask />,
-  },
+  // {
+  //   path: "dashboard/mytask",
+  //   element: <Mytask />,
+  // },
 ]);

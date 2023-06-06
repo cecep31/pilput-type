@@ -1,4 +1,4 @@
-import Logged from '../../../components/layouts/Logged'
+import Logged from '../../../components/layouts/DashboardLayout'
 
 const Setting = () => {
   return (
