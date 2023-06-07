@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { postDatanoauth } from "../../utils/fetch";
+import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from "../../components/modal/Loading";
 import Cookies from "js-cookie";
 
 export default function Login() {
@@ -12,15 +12,17 @@ export default function Login() {
   const [loginwait, setloginwait] = useState(false);
 
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    const id = toast.loading("Loading...");
+    setloginwait(true)
     e.preventDefault();
-    setloginwait(true);
+    // setloginwait(true);
     const data = {
       username: username,
       password: password,
     };
     const response = await postDatanoauth("/api/auth/login", data);
     if (response.status === 200) {
-      console.log(response);
+      toast.success("Success login", { id });
       const expire = new Date();
 
       // Menambahkan 3 hari ke tanggal sekarang
@@ -29,13 +31,14 @@ export default function Login() {
       Cookies.set("token", response.data.access_token, {
         secure: true,
         sameSite: "Strict",
-        expires: expire
+        expires: expire,
       });
       setloginwait(false);
       navigate("/dashboard");
     } else {
+      toast.error("Wrong username or password", { id });
       setloginwait(false);
-      alert("Wrong username or passowrd");
+      // alert("Wrong username or passowrd");
     }
   }
 
@@ -76,12 +79,22 @@ export default function Login() {
               />
 
               <div className="flex justify-center mt-6">
-                <button
-                  type="submit"
-                  className="text-xl w-48 px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
-                >
-                  Login
-                </button>
+                {loginwait ? (
+                  <button
+                    disabled
+                    type="submit"
+                    className="text-xl w-48 px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-2xl cursor-not-allowed"
+                  >
+                    Login...
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="text-xl w-48 px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
+                  >
+                    Login
+                  </button>
+                )}
               </div>
             </form>
             <p className="text-center mt-3 text-black">
@@ -95,7 +108,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      {loginwait ? <Loading /> : ""}
     </main>
   );
 }
