@@ -2,7 +2,6 @@ import Home from "../pages/page";
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import Dashoboard from "../pages/dashboard/page";
 import Blogs from "../pages/blogs/page";
-import Counter from "../pages/counter";
 import Login from "../pages/login/page";
 import Chat from "../pages/chat/page";
 import ErrorPage from "../pages/error-page";
@@ -50,10 +49,6 @@ export const router = createBrowserRouter([
   {
     path: "blogs",
     element: <Blogs />,
-  },
-  {
-    path: "counter",
-    element: <Counter />,
   },
   {
     path: "login",
