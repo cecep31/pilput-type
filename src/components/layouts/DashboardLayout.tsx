@@ -11,7 +11,6 @@ import {
 import { getData } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
 
-
 const storage = process.env.NEXT_PUBLIC_STORAGE;
 interface YourData {
   name: string;
@@ -20,7 +19,7 @@ interface YourData {
 }
 
 const Logged = () => {
-  const nagigate = useNavigate()
+  const nagigate = useNavigate();
   const [yourdata, setyourdata] = useState<YourData>({
     name: "Loading...",
     image: "placeholder/spinner.gif",
@@ -145,13 +144,11 @@ const Logged = () => {
                       +
                     </div>
                   </div> */}
-                  <div className="flex items-center">
-                    Hello {yourdata.name}
-                  </div>
+                  <div className="flex items-center">Hello {yourdata.name}</div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
                   <span className="mr-4 font-semibold text-gray-700">
-                    <BellIcon className="h-6 fill-slate-500"/>
+                    <BellIcon className="h-6 fill-slate-500" />
                   </span>
                   <Menu>
                     <Menu.Button>

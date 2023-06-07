@@ -3,9 +3,17 @@ import Modal from "../../../components/user/Modal";
 import { getData, deleteData } from "../../../utils/fetch";
 
 const apihost = process.env.NEXT_PUBLIC_API_HOST;
+interface User {
+  id: string;
+  name: string;
+  username: string;
+  image: string;
+  email: string;
+  issuperadmin: boolean;
+}
 
 const ManageUser = () => {
-  const [users, setusers] = useState<any[]>([]);
+  const [users, setusers] = useState<User[]>([]);
   const [username, setusername] = useState<string>();
   const [email, setemail] = useState<string>();
   const [password, setpassword] = useState<string>();
