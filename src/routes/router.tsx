@@ -1,4 +1,3 @@
-import Home from "../pages/page";
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import Dashoboard from "../pages/page";
 import ErrorPage from "../pages/error-page";
