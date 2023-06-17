@@ -1,11 +1,13 @@
-import NavBar from "../components/header/Navbar";
-import Landing from '../components/landing/landing';
+import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Dashboard() {
   return (
-      <div className="isolate bg-white dark:bg-gray-700">
-        <NavBar />
-        <Landing />
+    <>
+      <div className="">
+        <Link className="text-blue-500" to="/">
+          Home
+        </Link>
       </div>
+    </>
   );
 }
