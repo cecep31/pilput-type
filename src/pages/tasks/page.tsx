@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getData } from "../../../utils/fetch";
+import { getData } from "../../utils/fetch";
 
 const Mytask = () => {
   const [groups, setgroups] = useState<any[]>([]);

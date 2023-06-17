@@ -46,13 +46,13 @@ const Logged = () => {
         <div className="relative hidden h-screen shadow-lg lg:block w-80   ">
           <div className="flex h-full flex-col flex-1 space-y-1 bg-zinc-800 dark:bg-gray-700 text-gray-200 p-2 text-sm">
             <div className="flex justify-center my-5">
-              <Link to="/" className="rounded-xl">
+              <Link to="https://pilput.dev" className="rounded-xl">
                 <img src="/pilput.png" alt="pilput" height="50" width="100" />
               </Link>
             </div>
             <nav className="overflow-y-auto flex flex-1 flex-col border-b border-white/50">
               <Link
-                to="/dashboard"
+                to="/"
                 className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
               >
                 <svg
@@ -70,7 +70,7 @@ const Logged = () => {
               </Link>
 
               <Link
-                to="/dashboard/user-management"
+                to="/user-management"
                 className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
               >
                 <svg
@@ -87,7 +87,7 @@ const Logged = () => {
                 </span>
               </Link>
               <Link
-                to="/dashboard/mytask"
+                to="/mytask"
                 className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
               >
                 <svg

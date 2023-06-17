@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../../../components/user/Modal";
-import { getData, deleteData } from "../../../utils/fetch";
+import Modal from "../../components/user/Modal";
+import { getData, deleteData } from "../../utils/fetch";
 
 const apihost = process.env.NEXT_PUBLIC_API_HOST;
 interface User {
