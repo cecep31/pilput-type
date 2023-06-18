@@ -28,7 +28,7 @@ const Logged = () => {
 
   function logout() {
     Cookies.remove("token");
-    nagigate("/");
+    nagigate("https://pilput.dev");
   }
   async function getyourdata() {
     const response = await getData("/api/v1/profile");
