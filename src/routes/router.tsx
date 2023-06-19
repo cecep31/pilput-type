@@ -1,6 +1,6 @@
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import Dashoboard from "../pages/page";
-import ErrorPage from "../pages/error-page";
+// import ErrorPage from "../pages/error-page";
 import UserManagement from "../pages/user-management/page";
 import Mytask from "../pages/tasks/page";
 import Temp from "../pages/temp";
