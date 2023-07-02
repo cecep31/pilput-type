@@ -13,17 +13,19 @@ import { BellIcon } from "@heroicons/react/24/solid";
 
 const storage = process.env.NEXT_PUBLIC_STORAGE;
 interface YourData {
-  name: string;
-  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
   image: string;
 }
 
 const Logged = () => {
   const nagigate = useNavigate();
   const [yourdata, setyourdata] = useState<YourData>({
-    name: "Loading...",
+    email: "Loading...",
     image: "placeholder/spinner.gif",
-    username: "Loading...",
+    first_name: "",
+    last_name: "",
   });
 
   function logout() {
@@ -144,7 +146,9 @@ const Logged = () => {
                       +
                     </div>
                   </div> */}
-                  <div className="flex items-center">Hello {yourdata.name}</div>
+                  <div className="flex items-center">
+                    Hello {yourdata.first_name}
+                  </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
                   <span className="mr-4 font-semibold text-gray-700">
