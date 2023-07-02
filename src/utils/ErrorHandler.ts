@@ -9,7 +9,7 @@ export const ErrorHandlerAPI = (error: any) => {
     error?.response?.data?.message === "Authentication invalid" ||
     error?.response?.data?.message === "invalid algorithm"
   ) {
-    cookies.remove("token");
+    // cookies.remove("token");
     return error.response;
   }
   return error.response;

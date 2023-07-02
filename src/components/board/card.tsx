@@ -1,41 +1,30 @@
-import { useDrag } from "react-dnd";
+import { useDraggable } from "@dnd-kit/core";
 
-interface Props {
+interface Card {
   id: string;
   title: string;
-  group: string;
 }
 
-const Card = ({ id, title }: Props) => {
-  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
-    type: "CARD",
-    item: { id },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }));
+function Card({ card }: { card: Card }) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: card.id,
+  });
 
-  function HandleClick() {
-    alert(id)
-  }
+  const styles = {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  };
 
-  return isDragging ? (
-    <div ref={dragPreview} className="w-60 h-14"></div>
-  ) : (
+  return (
     <div
-      onClick={HandleClick}
-      className="w-60"
-      ref={drag}
-      style={{
-        backgroundColor: "lightblue",
-        padding: "10px",
-        marginBottom: "5px",
-      }}
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      className="card"
+      style={styles}
     >
-      {id}
-      {title}
+      {card.title}
     </div>
   );
-};
+}
 
 export default Card;

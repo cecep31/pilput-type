@@ -4,7 +4,7 @@ import Dashoboard from "../pages/page";
 import UserManagement from "../pages/user-management/page";
 import Mytask from "../pages/tasks/page";
 import Temp from "../pages/temp";
-import Board from '../pages/board/page'
+import Board from "../pages/board/page";
 import { createBrowserRouter } from "react-router-dom";
 import { loader } from "./logged";
 
@@ -28,8 +28,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "board",
-        element: <Board />
-      }
+        element: <Board />,
+      },
     ],
   },
   // {
