@@ -1,4 +1,4 @@
-import cookies from "js-cookie";
+// import cookies from "js-cookie";
 
 export const ErrorHandlerAPI = (error: any) => {
   if (

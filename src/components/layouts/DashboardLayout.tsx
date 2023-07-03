@@ -1,4 +1,4 @@
-import { Link, useNavigate, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
@@ -20,7 +20,6 @@ interface YourData {
 }
 
 const Logged = () => {
-  const nagigate = useNavigate();
   const [yourdata, setyourdata] = useState<YourData>({
     email: "Loading...",
     image: "placeholder/spinner.gif",

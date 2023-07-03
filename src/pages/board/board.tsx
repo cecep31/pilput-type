@@ -1,14 +1,7 @@
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
-import {
-  SortableContext,
-  sortableKeyboardCoordinates,
-} from "@dnd-kit/sortable";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Group from "../../components/board/group";
 import { useState } from "react";
-
-interface Card {
-  id: string;
-  title: string;
-}
 
 interface Group {
   id: string;
@@ -16,75 +9,83 @@ interface Group {
   cards: Card[];
 }
 
-function Board() {
-  const [groups, setGroups] = useState<Group[]>([
+interface Card {
+  id: string;
+  title: string;
+  group: string;
+}
+
+const Board = () => {
+  const [groups, setGroups] = useState([
     {
       id: "1",
       title: "Group 1",
       cards: [
-        { id: "1", title: "Card 1" },
-        { id: "2", title: "Card 2" },
-        { id: "3", title: "Card 3" },
+        { id: "1", title: "Card 1", group: "Group 1" },
+        { id: "2", title: "Card 2", group: "Group 1" },
       ],
     },
     {
       id: "2",
       title: "Group 2",
       cards: [
-        { id: "3", title: "Card 3" },
-        { id: "4", title: "Card 4" },
+        { id: "3", title: "Card 3", group: "Group 2" },
+        { id: "4", title: "Card 4", group: "Group 2" },
       ],
     },
   ]);
 
-  return (
-    <div className="board">
-      {groups.map((group) => (
-        <Group key={group.id} group={group} />
-      ))}
-    </div>
-  );
-}
+  const moveCard = (cardId: string, targetGroupId: string) => {
+    setGroups((prevGroups) => {
+      const updatedGroups = [...prevGroups];
 
-function Group({ group }: { group: Group }) {
+      const cardGroupIndex = updatedGroups.findIndex((group) =>
+        group.cards.find((card) => card.id === cardId)
+      );
+
+      if (cardGroupIndex !== -1) {
+        const cardIndex = updatedGroups[cardGroupIndex].cards.findIndex(
+          (card) => card.id === cardId
+        );
+
+        if (cardIndex !== -1) {
+          const movedCard = updatedGroups[cardGroupIndex].cards.splice(
+            cardIndex,
+            1
+          )[0];
+
+          const targetGroupIndex = updatedGroups.findIndex(
+            (group) => group.id === targetGroupId
+          );
+
+          if (targetGroupIndex !== -1) {
+            movedCard.group = targetGroupId;
+            updatedGroups[targetGroupIndex].cards.push(movedCard);
+          }
+        }
+      }
+
+      return updatedGroups;
+    });
+    console.log(groups);
+
+  };
+
   return (
-    <div className="group">
-      <h2>{group.title}</h2>
-      <SortableContext
-        items={group.cards.map((card) => card.id)}
-      >
-        {group.cards.map((card) => (
-          <Card key={card.id} card={card} />
+    <DndProvider backend={HTML5Backend}>
+      <div className="board flex space-x-2">
+        {groups.map((group, index) => (
+          <Group
+            key={index}
+            id={group.id}
+            title={group.title}
+            cards={group.cards}
+            moveCard={moveCard}
+          />
         ))}
-      </SortableContext>
-    </div>
+      </div>
+    </DndProvider>
   );
-}
+};
 
-function Card({ card }: { card: Card }) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: card.id,
-  });
-
-  
-
-  return (
-    <div
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      className="card"
-    >
-      {card.title}
-    </div>
-  );
-}
-
-function dnd() {
-  return (
-    <DndContext>
-      <Board />
-    </DndContext>
-  );
-}
-export default dnd;
+export default Board;
