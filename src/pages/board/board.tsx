@@ -1,5 +1,4 @@
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import Group from "../../components/board/group";
 import { useState } from "react";
 
@@ -18,24 +17,24 @@ interface Card {
 const Board = () => {
   const [groups, setGroups] = useState([
     {
-      id: "1",
+      id: 1,
       title: "Group 1",
       cards: [
-        { id: "1", title: "Card 1", group: "Group 1" },
-        { id: "2", title: "Card 2", group: "Group 1" },
+        { id: 1, title: "Card 1", group: "Group 1" },
+        { id: 2, title: "Card 2", group: "Group 1" },
       ],
     },
     {
-      id: "2",
+      id: 2,
       title: "Group 2",
       cards: [
-        { id: "3", title: "Card 3", group: "Group 2" },
-        { id: "4", title: "Card 4", group: "Group 2" },
+        { id: 3, title: "Card 3", group: "Group 2" },
+        { id: 4, title: "Card 4", group: "Group 2" },
       ],
     },
   ]);
 
-  const moveCard = (cardId: string, targetGroupId: string) => {
+  const moveCard = (cardId: number, targetGroupId: number) => {
     setGroups((prevGroups) => {
       const updatedGroups = [...prevGroups];
 
@@ -68,11 +67,18 @@ const Board = () => {
       return updatedGroups;
     });
     console.log(groups);
-
   };
+  function handledrop(e: DragEndEvent) {
+    const { active, over } = e;
+    const cardid = active.id;
+    const groupid = over?.id;
+    if (groupid) {
+      moveCard(cardid, groupid);
+    }
+  }
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndContext onDragEnd={handledrop}>
       <div className="board flex space-x-2">
         {groups.map((group, index) => (
           <Group
@@ -84,7 +90,7 @@ const Board = () => {
           />
         ))}
       </div>
-    </DndProvider>
+    </DndContext>
   );
 };
 
