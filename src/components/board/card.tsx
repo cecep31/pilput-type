@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
-  id: string;
+  id: number;
   title: string;
   group: string;
 }
@@ -10,7 +10,7 @@ interface Props {
 const Card = ({ id, title }: Props) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
-    data: {title: title},
+    data: { title: title },
   });
   const style = {
     // Outputs `translate3d(x, y, 0)`

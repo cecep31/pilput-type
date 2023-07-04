@@ -36,42 +36,40 @@ const Board = () => {
 
   const moveCard = (cardId: number, targetGroupId: number) => {
     setGroups((prevGroups) => {
+      // Membuat salinan baru dari array groups
       const updatedGroups = [...prevGroups];
 
-      const cardGroupIndex = updatedGroups.findIndex((group) =>
-        group.cards.find((card) => card.id === cardId)
+      // Mencari grup sumber dan kartu yang akan dipindahkan
+      const sourceGroupIndex = updatedGroups.findIndex((group) =>
+        group.cards.some((card) => card.id === cardId)
+      );
+      const targetGroupIndex = updatedGroups.findIndex(
+        (group) => group.id === targetGroupId
+      );
+      const cardIndex = updatedGroups[sourceGroupIndex].cards.findIndex(
+        (card) => card.id === cardId
       );
 
-      if (cardGroupIndex !== -1) {
-        const cardIndex = updatedGroups[cardGroupIndex].cards.findIndex(
-          (card) => card.id === cardId
+      // Memeriksa apakah grup sumber dan kartu ditemukan
+      if (sourceGroupIndex !== -1 && cardIndex !== -1) {
+        // Mengambil kartu dari grup sumber
+        const [card] = updatedGroups[sourceGroupIndex].cards.splice(
+          cardIndex,
+          1
         );
 
-        if (cardIndex !== -1) {
-          const movedCard = updatedGroups[cardGroupIndex].cards.splice(
-            cardIndex,
-            1
-          )[0];
-
-          const targetGroupIndex = updatedGroups.findIndex(
-            (group) => group.id === targetGroupId
-          );
-
-          if (targetGroupIndex !== -1) {
-            movedCard.group = targetGroupId;
-            updatedGroups[targetGroupIndex].cards.push(movedCard);
-          }
-        }
+        // Menambahkan kartu ke grup tujuan
+        updatedGroups[targetGroupIndex].cards.push(card);
       }
 
       return updatedGroups;
     });
-    console.log(groups);
   };
+
   function handledrop(e: DragEndEvent) {
     const { active, over } = e;
-    const cardid = active.id;
-    const groupid = over?.id;
+    const cardid = Number(active.id);
+    const groupid = Number(over?.id);
     if (groupid) {
       moveCard(cardid, groupid);
     }
@@ -86,7 +84,6 @@ const Board = () => {
             id={group.id}
             title={group.title}
             cards={group.cards}
-            moveCard={moveCard}
           />
         ))}
       </div>

@@ -1,26 +1,19 @@
-
 import Card from "./card";
 import { useDroppable } from "@dnd-kit/core";
 
 interface Props {
-  id: string;
+  id: number;
   title: string;
   cards: any[];
-  moveCard: (cardid: string, groupid: string) => void;
 }
 
-const Group = ({ id, title, cards, moveCard }: Props) => {
-  const {setNodeRef} = useDroppable({
+const Group = ({ id, title, cards }: Props) => {
+  const { setNodeRef } = useDroppable({
     id: id,
   });
 
-  
-
   return (
-    <div
-      ref={setNodeRef}
-      className={`group w-64 flex flex-col `}
-    >
+    <div ref={setNodeRef} className={`group w-64 flex flex-col `}>
       <div className="px-2 py-2 text-center flex justify-between">
         <div></div>
         <div>{title}</div>
