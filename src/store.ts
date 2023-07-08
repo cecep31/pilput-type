@@ -1,11 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
-import couterReducer from './features/couter/counterSlice'
+import { create } from "zustand";
 
-const store = configureStore({
-  reducer: {
-    couter: couterReducer
-  },
-})
+type Store = {
+  count: number;
+  inc: () => void;
+};
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export const useStore = create<Store>()((set) => ({
+  count: 1,
+  inc: () => set((state) => ({ count: state.count + 1 })),
+}));

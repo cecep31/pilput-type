@@ -32,6 +32,14 @@ const Board = () => {
         { id: 4, title: "Card 4", group: "Group 2" },
       ],
     },
+    {
+      id: 3,
+      title: "Group 3",
+      cards: [
+        { id: 5, title: "Card 3", group: "Group 2" },
+        { id: 6, title: "Card 4", group: "Group 2" },
+      ],
+    },
   ]);
 
   const moveCard = (cardId: number, targetGroupId: number) => {
@@ -66,25 +74,20 @@ const Board = () => {
     });
   };
 
-  function handledrop(e: DragEndEvent) {
-    const { active, over } = e;
-    const cardid = Number(active.id);
-    const groupid = Number(over?.id);
-    if (groupid) {
-      moveCard(cardid, groupid);
-    }
-  }
+  // function handledrop(e: DragEndEvent) {
+  //   const { active, over } = e;
+  //   const cardid = Number(active.id);
+  //   const groupid = Number(over?.id);
+  //   if (groupid) {
+  //     moveCard(cardid, groupid);
+  //   }
+  // }
 
   return (
-    <DndContext onDragEnd={handledrop}>
+    <DndContext >
       <div className="board flex space-x-2">
         {groups.map((group, index) => (
-          <Group
-            key={index}
-            id={group.id}
-            title={group.title}
-            cards={group.cards}
-          />
+          <Group key={index} id={group.id} items={group.cards} />
         ))}
       </div>
     </DndContext>
