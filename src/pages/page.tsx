@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useStore } from "@/store";
+import { countStore } from "@/stores/countStore";
 
 export default function Dashboard() {
-  const { count } = useStore();
+  const { count } = countStore();
   return (
     <>
       <div className="">

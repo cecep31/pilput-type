@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { getData } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
-import { useStore } from "@/store";
+import { countStore } from "@/stores/countStore";
 
 const storage = process.env.NEXT_PUBLIC_STORAGE;
 interface YourData {
@@ -27,7 +27,7 @@ const Logged = () => {
     first_name: "",
     last_name: "",
   });
-  const { count, inc } = useStore();
+  const { count, inc } = countStore();
 
   function logout() {
     Cookies.remove("token");
