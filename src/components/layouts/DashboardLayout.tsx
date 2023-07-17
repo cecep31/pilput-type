@@ -11,8 +11,8 @@ import {
 import { getData } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { countStore } from "@/stores/countStore";
+import {storagebaseurl, mainbaseurl} from '@/utils/fetch'
 
-const storage = process.env.NEXT_PUBLIC_STORAGE;
 interface YourData {
   first_name: string;
   last_name: string;
@@ -31,10 +31,10 @@ const Logged = () => {
 
   function logout() {
     Cookies.remove("token");
-    window.location.href = "https://pilput.dev";
+    window.location.href = mainbaseurl;
   }
   async function getyourdata() {
-    const response = await getData("/api/v1/profile");
+    const response = await getData("/auth/profile");
     if (response.status === 200) {
       setyourdata(response.data);
     }
@@ -49,7 +49,7 @@ const Logged = () => {
         <div className="relative hidden h-screen shadow-lg lg:block w-80   ">
           <div className="flex h-full flex-col flex-1 space-y-1 bg-zinc-800 dark:bg-gray-700 text-gray-200 p-2 text-sm">
             <div className="flex justify-center my-5">
-              <Link to="https://pilput.dev" className="rounded-xl">
+              <Link to={mainbaseurl} className="rounded-xl">
                 <img src="/pilput.png" alt="pilput" height="50" width="100" />
               </Link>
             </div>
@@ -162,7 +162,7 @@ const Logged = () => {
                           alt="profil"
                           width={50}
                           height={50}
-                          src={storage + yourdata.image}
+                          src={storagebaseurl + yourdata.image}
                           className="mx-auto object-cover rounded-full h-10 w-10"
                         />
                       ) : (

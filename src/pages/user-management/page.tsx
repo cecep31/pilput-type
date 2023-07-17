@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../components/user/Modal";
 import { getData, deleteData } from "../../utils/fetch";
+import { storagebaseurl } from "@/utils/fetch";
 
-const apihost = process.env.NEXT_PUBLIC_API_HOST;
+const apihost = process.env.API_HOST;
 interface User {
   id: string;
-  name: string;
-  username: string;
+  full_name: string;
+  first_name: string;
+  last_name: string;
   image: string;
   email: string;
   issuperadmin: boolean;
@@ -19,14 +21,13 @@ const ManageUser = () => {
   const [password, setpassword] = useState<string>();
   const [repassword, setrepassword] = useState<string>();
   const [modaluser, setmodaluser] = useState(false);
-  const hoststorage = process.env.NEXT_PUBLIC_STORAGE;
 
   useEffect(() => {
     getUsers();
   }, []);
 
   async function getUsers() {
-    const response = await getData("/api/v1/users");
+    const response = await getData("/users");
     if (response.status >= 200 && response.status <= 299) {
       setusers(response.data);
     }
@@ -112,7 +113,7 @@ const ManageUser = () => {
                             {user.image ? (
                               <img
                                 className="rounded-full"
-                                src={hoststorage + user.image}
+                                src={storagebaseurl + user.image}
                                 width="40"
                                 height="40"
                                 alt="Philip Harbach"
@@ -128,12 +129,12 @@ const ManageUser = () => {
                             )}
                           </div>
                           <div className="font-medium text-gray-800">
-                            {user.username}
+                            {user.first_name}
                           </div>
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{user.name}</div>
+                        <div className="text-left">{user.full_name}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">{user.email}</div>

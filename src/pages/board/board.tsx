@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { DndContext } from "@dnd-kit/core";
 import Group from "../../components/board/group";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ interface Card {
 }
 
 const Board = () => {
-  const [groups, setGroups] = useState([
+  const [groups] = useState([
     {
       id: 1,
       title: "Group 1",
@@ -42,46 +42,7 @@ const Board = () => {
     },
   ]);
 
-  const moveCard = (cardId: number, targetGroupId: number) => {
-    setGroups((prevGroups) => {
-      // Membuat salinan baru dari array groups
-      const updatedGroups = [...prevGroups];
-
-      // Mencari grup sumber dan kartu yang akan dipindahkan
-      const sourceGroupIndex = updatedGroups.findIndex((group) =>
-        group.cards.some((card) => card.id === cardId)
-      );
-      const targetGroupIndex = updatedGroups.findIndex(
-        (group) => group.id === targetGroupId
-      );
-      const cardIndex = updatedGroups[sourceGroupIndex].cards.findIndex(
-        (card) => card.id === cardId
-      );
-
-      // Memeriksa apakah grup sumber dan kartu ditemukan
-      if (sourceGroupIndex !== -1 && cardIndex !== -1) {
-        // Mengambil kartu dari grup sumber
-        const [card] = updatedGroups[sourceGroupIndex].cards.splice(
-          cardIndex,
-          1
-        );
-
-        // Menambahkan kartu ke grup tujuan
-        updatedGroups[targetGroupIndex].cards.push(card);
-      }
-
-      return updatedGroups;
-    });
-  };
-
-  // function handledrop(e: DragEndEvent) {
-  //   const { active, over } = e;
-  //   const cardid = Number(active.id);
-  //   const groupid = Number(over?.id);
-  //   if (groupid) {
-  //     moveCard(cardid, groupid);
-  //   }
-  // }
+  
 
   return (
     <DndContext >
