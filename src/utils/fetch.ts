@@ -7,6 +7,7 @@ export const dashbaseurl = process.env.DASH_URL || "";
 export const wsbaseurl = process.env.WS_URL || "";
 export const storagebaseurl = process.env.STORAGE_URL || "";
 export const mainbaseurl = process.env.MAIN_URL || "";
+export const domain = process.env.DOMAIN || "";
 
 const axiosIntence = axios.create({
   baseURL: apibaseurl,

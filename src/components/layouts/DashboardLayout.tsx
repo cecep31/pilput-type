@@ -8,10 +8,9 @@ import {
   HomeIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import { getData } from "../../utils/fetch";
+import { domain, getData } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
-import { countStore } from "@/stores/countStore";
-import {storagebaseurl, mainbaseurl} from '@/utils/fetch'
+import { storagebaseurl, mainbaseurl } from "@/utils/fetch";
 
 interface YourData {
   first_name: string;
@@ -27,10 +26,9 @@ const Logged = () => {
     first_name: "",
     last_name: "",
   });
-  const { count, inc } = countStore();
 
   function logout() {
-    Cookies.remove("token");
+    Cookies.remove("token", { path: "/", domain: `.${domain}` });
     window.location.href = mainbaseurl;
   }
   async function getyourdata() {
@@ -148,7 +146,7 @@ const Logged = () => {
                     </div>
                   </div> */}
                   <div className="flex items-center">
-                    count : {count} <button onClick={inc}>+</button>
+                    {yourdata.first_name}
                   </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
