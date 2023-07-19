@@ -104,13 +104,13 @@ const Logged = () => {
               </Link>
             </nav>
 
-            <Link
-              to="/"
+            <a
+              href={mainbaseurl}
               className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg"
             >
               <HomeIcon className="h-4 w-4" />
               <span>Back To Home</span>
-            </Link>
+            </a>
           </div>
         </div>
         <div className="flex flex-col relative w-full h-screen p-3 bg-stone-300">

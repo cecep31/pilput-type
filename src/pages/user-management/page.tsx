@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "../../components/user/Modal";
 import { getData, deleteData } from "../../utils/fetch";
 import { storagebaseurl } from "@/utils/fetch";
+import { toast } from "react-hot-toast";
 
 const apihost = process.env.API_HOST;
 interface User {
@@ -34,11 +35,14 @@ const ManageUser = () => {
   }
 
   async function deleteUser(id: string) {
-    const response = await deleteData(apihost + "/api/v1/users/" + id);
+    const toastid = toast.loading("Loading...");
+    const response = await deleteData("/users/" + id);
     if (response.status === 200) {
-      alert("Succes delete user");
+      toast.success("User Deleted", { id: toastid });
+    } else if (response.status === 403) {
+      toast.error("Forbidden action", { id: toastid });
     } else {
-      alert("Failed delete user");
+      toast.error("Failed", { id: toastid });
     }
   }
 
