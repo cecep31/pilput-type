@@ -4,7 +4,6 @@ import { getData, deleteData } from "../../utils/fetch";
 import { storagebaseurl } from "@/utils/fetch";
 import { toast } from "react-hot-toast";
 
-const apihost = process.env.API_HOST;
 interface User {
   id: string;
   full_name: string;
