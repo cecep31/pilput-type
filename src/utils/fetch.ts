@@ -9,12 +9,9 @@ export const storagebaseurl = process.env.STORAGE_URL || "";
 export const mainbaseurl = process.env.MAIN_URL || "";
 export const domain = process.env.DOMAIN || "";
 
-const axiosIntence = axios.create({
+export const axiosIntence = axios.create({
   baseURL: apibaseurl,
-  headers:{
-    Authorization: `Bearer ${getToken()}`
-  }
-})
+});
 
 export async function getDataExternal(url:string, params: any) {
   try {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../components/user/Modal";
-import { getData, deleteData } from "../../utils/fetch";
+import { deleteData, axiosIntence } from "../../utils/fetch";
 import { storagebaseurl } from "@/utils/fetch";
 import { toast } from "react-hot-toast";
 
@@ -27,10 +27,13 @@ const ManageUser = () => {
   }, []);
 
   async function getUsers() {
-    const response = await getData("/users");
-    if (response.status >= 200 && response.status <= 299) {
+    try {
+      const response = await axiosIntence.get("/api/v2/users")
       setusers(response.data);
+    } catch (error) {
+      toast.error("Cannot connecting with server")
     }
+    
   }
 
   async function deleteUser(id: string) {

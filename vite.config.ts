@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     "process.env": {
-      API_URL: "https://v2.pilput.dev",
+      API_URL: "https://api.pilput.dev",
       WS_URL: "wss://v2.pilput.dev",
       STORAGE_URL: "https://d42zd71vraxqs.cloudfront.net/",
       DOMAIN: "pilput.dev",
