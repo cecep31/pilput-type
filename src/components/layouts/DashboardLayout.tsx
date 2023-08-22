@@ -8,9 +8,10 @@ import {
   HomeIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import { domain, getData } from "../../utils/fetch";
+import { axiosIntence, domain } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { storagebaseurl, mainbaseurl } from "@/utils/fetch";
+import { getToken } from "@/utils/Auth";
 
 interface YourData {
   first_name: string;
@@ -26,15 +27,20 @@ const Logged = () => {
     first_name: "",
     last_name: "",
   });
+  const token = getToken();
 
   function logout() {
     Cookies.remove("token", { path: "/", domain: `.${domain}` });
     window.location.href = mainbaseurl;
   }
   async function getyourdata() {
-    const response = await getData("/auth/profile");
-    if (response.status === 200) {
+    try {
+      const response = await axiosIntence.get("/auth/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setyourdata(response.data);
+    } catch (error) {
+      console.error(error);
     }
   }
   useEffect(() => {
@@ -145,9 +151,7 @@ const Logged = () => {
                       +
                     </div>
                   </div> */}
-                  <div className="flex items-center">
-                    {yourdata.first_name}
-                  </div>
+                  <div className="flex items-center">{yourdata.first_name}</div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
                   <span className="mr-4 font-semibold text-gray-700">
