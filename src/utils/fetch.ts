@@ -2,12 +2,12 @@ import axios from "axios";
 import { ErrorHandlerAPI } from "./ErrorHandler";
 import { getToken } from "./Auth";
 
-export const apibaseurl = process.env.API_URL || "";
-export const dashbaseurl = process.env.DASH_URL || "";
-export const wsbaseurl = process.env.WS_URL || "";
-export const storagebaseurl = process.env.STORAGE_URL || "";
-export const mainbaseurl = process.env.MAIN_URL || "";
-export const domain = process.env.DOMAIN || "";
+export const apibaseurl = import.meta.env.VITE_API_URL || "";
+export const dashbaseurl = import.meta.env.VITE_DASH_URL || "";
+export const wsbaseurl = import.meta.env.VITE_WS_URL || "";
+export const storagebaseurl = import.meta.env.VITE_STORAGE_URL || "";
+export const mainbaseurl = import.meta.env.VITE_MAIN_URL || "";
+export const domain = import.meta.env.VITE_DOMAIN || "";
 
 export const axiosIntence = axios.create({
   baseURL: apibaseurl,
