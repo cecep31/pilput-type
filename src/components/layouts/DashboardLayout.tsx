@@ -1,7 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
 
 import {
   ArrowLeftOnRectangleIcon,
@@ -12,6 +11,14 @@ import { axiosIntence, domain } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
 import { storagebaseurl, mainbaseurl } from "@/utils/fetch";
 import { getToken } from "@/utils/Auth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 interface YourData {
   first_name: string;
@@ -94,7 +101,7 @@ const Logged = () => {
                 </span>
               </Link>
               <Link
-                to="/board"
+                to="/posts"
                 className="flex items-center my-2 justify-start w-full py-3 px-3 transition-colors duration-200 hover:bg-zinc-700 rounded-lg dark:text-white"
               >
                 <svg
@@ -106,7 +113,7 @@ const Logged = () => {
                   <path d="M5.566 4.657A4.505 4.505 0 016.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0015.75 3h-7.5a3 3 0 00-2.684 1.657zM2.25 12a3 3 0 013-3h13.5a3 3 0 013 3v6a3 3 0 01-3 3H5.25a3 3 0 01-3-3v-6zM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 016.75 6h10.5a3 3 0 012.683 1.657A4.505 4.505 0 0018.75 7.5H5.25z" />
                 </svg>
 
-                <span className="mx-2 text-gray-200 font-normal">Board</span>
+                <span className="mx-2 text-gray-200 font-normal">Posts</span>
               </Link>
             </nav>
 
@@ -157,8 +164,8 @@ const Logged = () => {
                   <span className="mr-4 font-semibold text-gray-700">
                     <BellIcon className="h-6 fill-slate-500" />
                   </span>
-                  <Menu>
-                    <Menu.Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger >
                       {yourdata.image ? (
                         <img
                           alt="profil"
@@ -176,44 +183,34 @@ const Logged = () => {
                           className="mx-auto object-cover rounded-full h-10 w-10"
                         />
                       )}
-                    </Menu.Button>
-                    <Transition
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute text-gray-600 right-5 mt-6 w-44 origin-top-right divide-y divide-gray-100 rounded-tl-lg rounded-bl-lg rounded-br-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          <Link
-                            to="/"
-                            className="px-3 rounded-tl-lg py-2 w-full text-left hover:bg-slate-200 flex items-center"
-                          >
-                            <HomeIcon className="h-5 mr-3" /> Go Home Page
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <Link
-                            to="/profile"
-                            className="px-3 py-2 w-full text-left hover:bg-slate-200 flex items-center"
-                          >
-                            <UserCircleIcon className="h-5 mr-3" /> Profile
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item>
-                          <button
-                            className="px-3 rounded-b-lg py-2 w-full text-left hover:bg-slate-200 flex items-center"
-                            onClick={logout}
-                          >
-                            <ArrowLeftOnRectangleIcon className="h-5 mr-3" />{" "}
-                            Logout
-                          </button>
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="mr-9 w-[200px]">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <Link
+                          to="/profile"
+                          className="py-1 w-full flex items-center"
+                        >
+                          <UserCircleIcon className="h-5 mr-3" /> Profile
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Link to="/" className="py-1 w-full flex items-center">
+                          <HomeIcon className="h-5 mr-3" /> Go Home Page
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <button
+                          className="py-1 w-full flex items-center"
+                          onClick={logout}
+                        >
+                          <ArrowLeftOnRectangleIcon className="h-5 mr-3" />{" "}
+                          Logout
+                        </button>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </div>
             </div>
