@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react";
 import { postsStore } from "@/stores/postStore";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 
 
@@ -24,9 +25,11 @@ export default function Index() {
     <div className="px-5 py-4">
       <div className="text-xl font-semibold my-3">Posts</div>
       <div>
+        <Link to={'/posts/create'}>
         <Button variant="secondary" className="border">
           Add new post
         </Button>
+        </Link>
       </div>
       <Table>
         <TableCaption>A list of your Posts.</TableCaption>
