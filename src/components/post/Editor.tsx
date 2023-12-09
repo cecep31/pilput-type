@@ -1,13 +1,12 @@
-import '@/titptap.scss'
+import "@/titptap.scss";
 // src/Tiptap.jsx
 import { BubbleMenu, EditorProvider } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar";
-import Blockquote from '@tiptap/extension-blockquote';
-import Buble from './Bubble';
+import Buble from "./Bubble";
 
 // define your extension array
-const extensions = [StarterKit,Blockquote];
+const extensions = [StarterKit];
 
 const content = `
 <h2>
@@ -42,16 +41,18 @@ display: none;
 
 const Tiptap = () => {
   return (
-    <>
-      <EditorProvider
+    <div className="bg-white border rounded-xl overflow-hidden">
+      <EditorProvider editable={true}
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
       >
         {/* <FloatingMenu><MenuBar/></FloatingMenu> */}
-        <BubbleMenu><Buble /></BubbleMenu>
+        <BubbleMenu>
+          <Buble />
+        </BubbleMenu>
       </EditorProvider>
-    </>
+    </div>
   );
 };
 
