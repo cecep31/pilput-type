@@ -4,6 +4,8 @@ import { BubbleMenu, EditorProvider } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar";
 import Buble from "./Bubble";
+import { useState } from "react";
+
 
 // define your extension array
 const extensions = [StarterKit];
@@ -40,19 +42,31 @@ display: none;
 `;
 
 const Tiptap = () => {
+  const [body, setbody] = useState("")
   return (
     <div className="border">
       <EditorProvider
+        onUpdate={(editor) => {setbody(editor.editor.getHTML() || "")}}
         editable={true}
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
       >
-        {/* <FloatingMenu><MenuBar/></FloatingMenu> */}
+        {/* <FloatingMenu>
+         wkwk
+        </FloatingMenu> */}
         <BubbleMenu>
           <Buble />
         </BubbleMenu>
       </EditorProvider>
+      <div>
+      <div className="my-10 mx-auto flex justify-center ">
+          <div
+            className="prose"
+            dangerouslySetInnerHTML={{ __html: body }}
+          ></div>
+        </div>
+      </div>
     </div>
   );
 };
