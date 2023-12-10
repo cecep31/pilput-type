@@ -1,5 +1,5 @@
 import { useCurrentEditor } from "@tiptap/react";
-import { Bold, Italic } from "lucide-react";
+import { Bold, Italic,Quote } from "lucide-react";
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor();
@@ -8,7 +8,7 @@ const MenuBar = () => {
     return null;
   }
   return (
-    <div className="flex space-x-1 border-2 bg-slate-500 py-4">
+    <div className="flex space-x-1 rounded-t-lg border-2 bg-slate-500 py-4">
       <button
         onClick={() => editor?.chain().focus().toggleBold().run()}
         className={`${
@@ -23,7 +23,7 @@ const MenuBar = () => {
           editor?.isActive("bold") ? "bg-slate-600 text-white" : ""
         } p-1`}
       >
-        blockquote
+        <Quote />
       </button>
       <button
         onClick={() => editor?.chain().focus().toggleCodeBlock().run()}

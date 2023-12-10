@@ -41,8 +41,9 @@ display: none;
 
 const Tiptap = () => {
   return (
-    <div className="bg-white border rounded-xl overflow-hidden">
-      <EditorProvider editable={true}
+    <div className="border">
+      <EditorProvider
+        editable={true}
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
