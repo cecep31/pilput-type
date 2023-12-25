@@ -215,7 +215,7 @@ const Logged = () => {
               </div>
             </div>
           </header>
-          <div className="h-full mt-2 p-3 bg-gray-100 shadow-md border rounded overflow-y-auto">
+          <div className="h-full mt-2 p-3 overflow-y-auto">
             <Outlet />
           </div>
         </div>

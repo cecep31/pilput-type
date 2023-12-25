@@ -9,7 +9,7 @@ function PostCreate() {
   console.log(editor?.getHTML());
 
   return (
-    <div className="max-w-3xl mx-auto px-5 py-5">
+    <div className="max-w-3xl bg-white mx-auto px-5 py-5">
       <div className="text-2xl mx-auto my-7 font-bold">
         <input
           className="w-full text-3xl py-3 font-bold text-black bg-transparent border-none"
