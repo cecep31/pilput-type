@@ -6,3 +6,9 @@ export interface PostInterface {
     creator: any;
     created_at: string;
 }
+
+export interface createPostInterface {
+    title: string;
+    body: string;
+    slug: string;
+}

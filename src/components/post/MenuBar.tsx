@@ -8,12 +8,12 @@ const MenuBar = () => {
     return null;
   }
   return (
-    <div className="flex space-x-1 rounded-t-lg border-2 bg-slate-500 py-4">
+    <div className="flex space-x-1 border-2 bg-gray-100 py-4">
       <button
         onClick={() => editor?.chain().focus().toggleBold().run()}
         className={`${
-          editor?.isActive("bold") ? "bg-slate-600 text-white" : ""
-        } p-1`}
+          editor?.isActive("bold") ? "bg-blue-200 text-white" : ""
+        } p-2 hover:bg-blue-200 rounded-lg`}
       >
         <Bold />
       </button>
