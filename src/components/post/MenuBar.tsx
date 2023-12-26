@@ -1,5 +1,5 @@
 import { useCurrentEditor } from "@tiptap/react";
-import { Bold, Italic,Quote } from "lucide-react";
+import { Bold, Italic,List,ListOrdered,Quote } from "lucide-react";
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor();
@@ -18,10 +18,26 @@ const MenuBar = () => {
         <Bold />
       </button>
       <button
+        onClick={() => editor?.chain().focus().toggleBulletList().run()}
+        className={`${
+          editor?.isActive("bulletList") ? "bg-blue-200 text-white" : ""
+        } p-2 hover:bg-blue-200 rounded-lg`}
+      >
+        <List />
+      </button>
+      <button
+        onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+        className={`${
+          editor?.isActive("orderedList") ? "bg-blue-200 text-white" : ""
+        } p-2 hover:bg-blue-200 rounded-lg`}
+      >
+        <ListOrdered />
+      </button>
+      <button
         onClick={() => editor?.chain().focus().toggleBlockquote().run()}
         className={`${
           editor?.isActive("bold") ? "bg-slate-600 text-white" : ""
-        } p-1`}
+        } p-2 hover:bg-blue-200 rounded-lg`}
       >
         <Quote />
       </button>
@@ -29,7 +45,7 @@ const MenuBar = () => {
         onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
         className={`${
           editor?.isActive("codeBlock") ? "bg-slate-600 text-white" : ""
-        } p-1`}
+        } p-2 hover:bg-blue-200 rounded-lg`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

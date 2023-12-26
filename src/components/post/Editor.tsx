@@ -16,7 +16,7 @@ const Tiptap = ({
   onchange: (data: string) => void;
 }) => {
   return (
-    <div className="border">
+    <div className="border prose md:prose-2xl">
       <EditorProvider
         // onUpdate={(editor) => {setbody(editor.editor.getHTML() || "")}}
         // onUpdate={onchange}

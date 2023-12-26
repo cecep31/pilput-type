@@ -1,10 +1,11 @@
 /* Basic editor styles */
 .ProseMirror {
   > * + * {
-    margin-top: 1.75em;
+    // margin-top: 1.75em;
   }
   min-height: 700px;
-  padding: 6px;
+  padding-left: 6px;
+  padding-right: 6px;
 
   img {
     max-width: 500px;
@@ -15,12 +16,6 @@
     }
   }
 
-  ul{
-    list-style: disc;
-  }
-  li{
-    list-style: decimal;
-  }
 
   ul,
   ol {
