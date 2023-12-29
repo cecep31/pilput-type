@@ -1,4 +1,4 @@
-import "@/titptap.scss";
+// import "@/titptap.scss";
 // src/Tiptap.jsx
 import { BubbleMenu, EditorProvider } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -16,8 +16,8 @@ const Tiptap = ({
   onchange: (data: string) => void;
 }) => {
   return (
-    <div className="border prose md:prose-2xl">
-      <EditorProvider
+    <div className="border">
+      <EditorProvider editorProps={{attributes: {class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none',}}}
         // onUpdate={(editor) => {setbody(editor.editor.getHTML() || "")}}
         // onUpdate={onchange}
         onUpdate={(props) => {
