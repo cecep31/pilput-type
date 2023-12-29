@@ -1,12 +1,12 @@
 // import "@/titptap.scss";
 // src/Tiptap.jsx
-import { BubbleMenu, EditorProvider } from "@tiptap/react";
+import { EditorProvider } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Undelineextention from "@tiptap/extension-underline";
 import MenuBar from "./MenuBar";
-import Buble from "./Bubble";
 
 // define your extension array
-const extensions = [StarterKit];
+const extensions = [StarterKit, Undelineextention];
 
 const Tiptap = ({
   content,
@@ -17,9 +17,13 @@ const Tiptap = ({
 }) => {
   return (
     <div className="border">
-      <EditorProvider editorProps={{attributes: {class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none',}}}
-        // onUpdate={(editor) => {setbody(editor.editor.getHTML() || "")}}
-        // onUpdate={onchange}
+      <EditorProvider
+        editorProps={{
+          attributes: {
+            class:
+              "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none pt-2",
+          },
+        }}
         onUpdate={(props) => {
           onchange(props.editor.getHTML());
         }}
@@ -27,19 +31,8 @@ const Tiptap = ({
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
-      >
-        <BubbleMenu>
-          <Buble />
-        </BubbleMenu>
-      </EditorProvider>
-      {/* <div>
-        <div className="my-10 mx-auto flex justify-center ">
-          <div
-            className="prose"
-            dangerouslySetInnerHTML={{ __html: body }}
-          ></div>
-        </div>
-      </div> */}
+        children={undefined}
+      ></EditorProvider>
     </div>
   );
 };
