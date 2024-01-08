@@ -47,8 +47,8 @@ function PostCreate() {
   }
   return (
     <div className="max-w-3xl bg-white mx-auto px-5 py-5">
-      <div>
-        <img src={post.photo_url} alt="" />
+      <div className="flex justify-center">
+        <img src={post.photo_url} alt="" className="max-h-96"/>
       </div>
       <input type="file" onChange={uploadPhoto} />
       <div className="text-2xl mx-auto my-7 font-bold">
