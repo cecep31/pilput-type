@@ -11,4 +11,5 @@ export interface createPostInterface {
     title: string;
     body: string;
     slug: string;
+    photo_url: string;
 }

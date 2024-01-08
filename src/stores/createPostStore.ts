@@ -6,6 +6,7 @@ interface PostsState {
     updatetitle: (title: string) => void
     updatebody: (body: string) => void
     updateSlug: (slug: string) => void
+    updatePhoto_url: (photo_url: string) => void
     error: boolean
     total: number;
 }
@@ -41,11 +42,12 @@ export const postsStore = create<PostsState>()((set) => ({
       <br />
       — Mom
     </blockquote>
-    `, slug: ''
+    `, slug: '', photo_url: ""
     },
     updatetitle: (title: string) => set((state) => ({ post: { ...state.post, title } })),
     updatebody: (body: string) => set((state) => ({ post: { ...state.post, body } })),
     updateSlug: (slug: string) => set((state) => ({ post: { ...state.post, slug } })),
+    updatePhoto_url :(photo_url: string) => set((state) => ({ post: { ...state.post, photo_url } })),
     error: false,
     total: 0
 }))
