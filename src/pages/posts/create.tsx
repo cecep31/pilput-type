@@ -3,11 +3,13 @@ import { useCurrentEditor } from "@tiptap/react";
 import MyEditor from "../../components/post/Editor";
 import { postsStore } from "@/stores/createPostStore";
 import { axiosIntence } from "@/utils/fetch";
+import { getToken } from "@/utils/Auth";
 
 
 
 function PostCreate() {
   const { editor } = useCurrentEditor();
+  const token = getToken();
   // const editor = useEditor();
   // console.log(editor?.getHTML());
   console.log(editor?.getHTML());
@@ -26,7 +28,9 @@ function PostCreate() {
         formData.append('image', file);
 
         // Adjust the URL for your file upload endpoint
-        const response = await axiosIntence.post('/api/v2/posts/image', formData);
+        const response = await axiosIntence.post('/api/v2/posts/image', formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         // Assuming your server responds with the uploaded file URL
         const photoUrl = response.data.photo_url;
