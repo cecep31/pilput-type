@@ -16,12 +16,12 @@ const Tiptap = ({
   onchange: (data: string) => void;
 }) => {
   return (
-    <div className="border ">
+    <div className="border w-full">
       <EditorProvider
         editorProps={{
           attributes: {
             class:
-              "prose prose-sm sm:prose lg:prose-lg mx-auto focus:outline-none pt-2",
+              "w-full prose prose-sm sm:prose lg:prose-lg focus:outline-none pt-2",
           },
         }}
         onUpdate={(props) => {
