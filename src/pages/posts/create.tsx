@@ -86,7 +86,12 @@ function PostCreate() {
         } else {
           console.error("Other error:", error);
         }
-        toast.error("error", { id: toastid });
+      
+        if (axiosError.response?.status === 422) {
+          toast.error("Validation error", { id: toastid });
+        }else{
+          toast.error("error", { id: toastid });
+        }
       }
     }
   }
