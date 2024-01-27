@@ -108,7 +108,7 @@ function PostCreate() {
           </div>
 
           <div className="flex justify-center">
-            <img src={post.photo_url} alt="" className="max-h-96" />
+            <img src={process.env.VITE_STORAGE_URL+""+post.photo_url} alt="" className="max-h-96" />
           </div>
           <div className="my-7 w-full">
             <input
