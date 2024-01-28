@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { convertToSlug } from "@/utils/slug";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
+import {storagebaseurl} from '@/utils/getConfig'
 
 interface MyResponse {
   error?: {
@@ -108,7 +109,7 @@ function PostCreate() {
           </div>
 
           <div className="flex justify-center">
-            <img src={process.env.VITE_STORAGE_URL+""+post.photo_url} alt="" className="max-h-96" />
+            <img src={storagebaseurl+""+post.photo_url} alt="" className="max-h-96" />
           </div>
           <div className="my-7 w-full">
             <input
