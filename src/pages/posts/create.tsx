@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { convertToSlug } from "@/utils/slug";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import {storagebaseurl} from '@/utils/getConfig'
+import { getUrlImage } from "@/utils/getImage";
 
 interface MyResponse {
   error?: {
@@ -87,10 +87,10 @@ function PostCreate() {
         } else {
           console.error("Other error:", error);
         }
-      
+
         if (axiosError.response?.status === 422) {
           toast.error("Validation error", { id: toastid });
-        }else{
+        } else {
           toast.error("error", { id: toastid });
         }
       }
@@ -109,7 +109,11 @@ function PostCreate() {
           </div>
 
           <div className="flex justify-center">
-            <img src={storagebaseurl+""+post.photo_url} alt="" className="max-h-96" />
+            <img
+              src={getUrlImage(post.photo_url)}
+              alt=""
+              className="max-h-96"
+            />
           </div>
           <div className="my-7 w-full">
             <input

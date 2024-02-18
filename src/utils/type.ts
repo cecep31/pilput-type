@@ -3,7 +3,7 @@ export interface PostInterface {
     title: string;
     body: string;
     slug: string;
-    creator: any;
+    creator: userInterface;
     created_at: string;
 }
 
@@ -12,4 +12,12 @@ export interface createPostInterface {
     body: string;
     slug: string;
     photo_url: string;
+}
+
+export interface userInterface {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    image: string;
 }

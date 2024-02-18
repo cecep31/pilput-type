@@ -3,13 +3,13 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 import {
-  ArrowLeftOnRectangleIcon,
+  ArrowLeftStartOnRectangleIcon,
   HomeIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { axiosIntence, domain } from "../../utils/fetch";
 import { BellIcon } from "@heroicons/react/24/solid";
-import { storagebaseurl, mainbaseurl } from "@/utils/fetch";
+import { mainbaseurl } from "@/utils/getConfig";
 import { getToken } from "@/utils/Auth";
 import {
   DropdownMenu,
@@ -19,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { getProfilePicture } from "@/utils/getImage";
 
 interface YourData {
   first_name: string;
@@ -171,7 +172,7 @@ const Logged = () => {
                           alt="profil"
                           width={50}
                           height={50}
-                          src={storagebaseurl + yourdata.image}
+                          src={getProfilePicture(yourdata.image)}
                           className="mx-auto object-cover rounded-full h-10 w-10"
                         />
                       ) : (
@@ -205,7 +206,7 @@ const Logged = () => {
                           className="py-1 w-full flex items-center"
                           onClick={logout}
                         >
-                          <ArrowLeftOnRectangleIcon className="h-5 mr-3" />{" "}
+                          <ArrowLeftStartOnRectangleIcon className="h-5 mr-3" />{" "}
                           Logout
                         </button>
                       </DropdownMenuItem>
