@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../../components/user/Modal";
+import Modal from "@/components/user/Modal";
 import { axiosIntence } from "../../utils/fetch";
-import { storagebaseurl } from "@/utils/fetch";
 import { toast } from "react-hot-toast";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getProfilePicture } from "@/utils/getImage";
+import { getAuth } from "@/utils/Auth";
+import { userInterface } from "@/utils/type";
 
 interface User {
   id: string;
@@ -21,19 +24,24 @@ const ManageUser = () => {
   const [password, setpassword] = useState<string>();
   const [repassword, setrepassword] = useState<string>();
   const [modaluser, setmodaluser] = useState(false);
+  const [auth, setauth] = useState<userInterface>();
 
+  async function localGetAuth() {
+    const auth = await getAuth();
+    setauth(auth);
+  }
   useEffect(() => {
     getUsers();
+    localGetAuth();
   }, []);
 
   async function getUsers() {
     try {
-      const response = await axiosIntence.get("/api/v2/users")
+      const response = await axiosIntence.get("/api/v2/users");
       setusers(response.data);
     } catch (error) {
-      toast.error("Cannot connecting with server")
+      toast.error("Cannot connecting with server");
     }
-    
   }
 
   async function deleteUser(id: string) {
@@ -66,25 +74,27 @@ const ManageUser = () => {
       <div className="min-h-screen">
         <header className="px-5 py-4 border-b border-gray-100 ">
           <span className="font-semibold text-gray-800">Users</span>
-          <button
-            className="ml-3 bg-green-600 text-white py-2 px-4 rounded-xl hover:bg-green-700"
-            onClick={showModaluser}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-4 h-4"
+          {auth?.issuperadmin && (
+            <button
+              className="ml-3 bg-green-600 text-white py-2 px-4 rounded-xl hover:bg-green-700"
+              onClick={showModaluser}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+                />
+              </svg>
+            </button>
+          )}
         </header>
         <div className="p-3">
           <div className="">
@@ -114,26 +124,18 @@ const ManageUser = () => {
                   return (
                     <tr key={user.id}>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-                            {user.image ? (
-                              <img
-                                className="rounded-full"
-                                src={storagebaseurl + user.image}
-                                width="40"
-                                height="40"
-                                alt="Philip Harbach"
-                              />
-                            ) : (
-                              <img
-                                className="rounded-full"
-                                src="https://placeimg.com/640/480/any"
-                                width="40"
-                                height="40"
-                                alt="Philip Harbach"
-                              />
-                            )}
-                          </div>
+                        <div className="flex gap-2 items-center">
+                          <Avatar>
+                            <AvatarImage
+                              src={getProfilePicture(user.image)}
+                              width={5}
+                              height={5}
+                              alt="Avatar"
+                            ></AvatarImage>
+                            <AvatarFallback>
+                              {user.first_name[0]}
+                            </AvatarFallback>
+                          </Avatar>
                           <div className="font-medium text-gray-800">
                             {user.first_name}
                           </div>

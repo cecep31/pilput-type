@@ -20,4 +20,5 @@ export interface userInterface {
     last_name: string;
     email: string;
     image: string;
+    issuperadmin: boolean;
 }
