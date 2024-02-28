@@ -1,6 +1,6 @@
 import cookiesjs from "js-cookie";
-import { getData } from "./fetch";
 import { userInterface } from "./type";
+import { axiosIntence } from './fetch'
 
 export function getToken() {
   const token = cookiesjs.get("token");
@@ -8,6 +8,6 @@ export function getToken() {
 }
 
 export const getAuth = async () => {
-  const auth = await getData("/api/v1/profile");
+  const auth = await axiosIntence.get("/api/v1/profile");
   return auth.data as userInterface;
 };
