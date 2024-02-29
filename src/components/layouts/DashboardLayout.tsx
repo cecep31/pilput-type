@@ -7,7 +7,7 @@ import {
 import { axiosIntence } from "../../utils/fetch";
 import { mainbaseurl } from "@/utils/getConfig";
 import { getToken } from "@/utils/Auth";
-import Topbar from "./topbar";
+import Topbar from "./Topbar";
 
 interface YourData {
   first_name: string;
