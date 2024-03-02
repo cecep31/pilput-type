@@ -8,6 +8,6 @@ export function getToken() {
 }
 
 export const getAuth = async () => {
-  const auth = await axiosIntence.get("/api/v1/profile");
+  const auth = await axiosIntence.get("/api/auth/profile");
   return auth.data as userInterface;
 };

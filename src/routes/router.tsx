@@ -2,7 +2,6 @@ import DashboardLayout from "../components/layouts/DashboardLayout";
 import Dashoboard from "../pages/page";
 import UserManagement from "../pages/user-management/page";
 import Temp from "../pages/temp";
-import Board from "../pages/board/page";
 import Posts from "@/pages/posts";
 import PostCreate from "@/pages/posts/create";
 import { createBrowserRouter } from "react-router-dom";
@@ -21,10 +20,6 @@ export const router = createBrowserRouter([
         path: "user-management",
         element: <UserManagement />,
         loader: loader,
-      },
-      {
-        path: "board",
-        element: <Board />,
       },
       {
         path: "posts/create",
