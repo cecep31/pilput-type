@@ -32,16 +32,19 @@ const ManageUser = () => {
   }
   useEffect(() => {
     getUsers();
+
     localGetAuth();
   }, []);
 
   async function getUsers() {
     try {
-      const response = await axiosIntence2.get("/users",{
+      const response = await axiosIntence2.get("/users", {
         headers: {
           Authorization: `Bearer ${getToken()}`,
-        }
+        },
       });
+      console.log(response.data);
+      
       setusers(response.data);
     } catch (error) {
       toast.error("Cannot connecting with server");
