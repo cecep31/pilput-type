@@ -18,9 +18,6 @@ import Days from "dayjs";
 
 export default function Index() {
   const poststore = postsStore();
-
-  console.log(poststore.posts);
-  console.log(poststore.total);
   useEffect(() => {
     poststore.fetch();
     

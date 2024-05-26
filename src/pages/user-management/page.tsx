@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Modal from "@/components/user/Modal";
-import { axiosIntence } from "../../utils/fetch";
+import { axiosIntence, axiosIntence2 } from "../../utils/fetch";
 import { toast } from "react-hot-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getProfilePicture } from "@/utils/getImage";
-import { getAuth } from "@/utils/Auth";
+import { getAuth, getToken } from "@/utils/Auth";
 import { userInterface } from "@/utils/type";
 
 interface User {
@@ -37,7 +37,11 @@ const ManageUser = () => {
 
   async function getUsers() {
     try {
-      const response = await axiosIntence.get("/api/v2/users");
+      const response = await axiosIntence2.get("/users",{
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        }
+      });
       setusers(response.data);
     } catch (error) {
       toast.error("Cannot connecting with server");
