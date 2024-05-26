@@ -43,7 +43,6 @@ const ManageUser = () => {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      console.log(response.data);
       
       setusers(response.data);
     } catch (error) {
