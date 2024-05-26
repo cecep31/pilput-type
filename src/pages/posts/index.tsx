@@ -19,8 +19,11 @@ import Days from "dayjs";
 export default function Index() {
   const poststore = postsStore();
 
+  console.log(poststore.posts);
+  console.log(poststore.total);
   useEffect(() => {
     poststore.fetch();
+    
   }, []);
   return (
     <div className="px-5 bg-white shadow-md py-4">
@@ -54,6 +57,7 @@ export default function Index() {
                       height={5}
                       alt="Avatar"
                     ></AvatarImage>
+                    {post.creator?.email}
                     <AvatarFallback>
                       {post.creator?.first_name[0]}
                     </AvatarFallback>
