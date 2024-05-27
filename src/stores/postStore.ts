@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { axiosIntence2 } from '@/utils/fetch'
-import { PostInterface } from '@/utils/type'
+import { PostInterface } from '@/types'
 
 interface PostsState {
     posts: PostInterface[]

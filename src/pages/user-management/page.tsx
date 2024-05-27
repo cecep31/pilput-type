@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getProfilePicture } from "@/utils/getImage";
 import { getAuth, getToken } from "@/utils/Auth";
-import { userInterface } from "@/utils/type";
+import { userInterface } from "@/types";
 
 interface User {
   id: string;

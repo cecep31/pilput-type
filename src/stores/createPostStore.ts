@@ -1,5 +1,5 @@
+import { createPostInterface } from '@/types'
 import { create } from 'zustand'
-import { createPostInterface } from '@/utils/type'
 
 interface PostsState {
     post: createPostInterface
