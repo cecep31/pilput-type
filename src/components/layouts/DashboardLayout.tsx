@@ -123,7 +123,7 @@ const Logged = () => {
         </div>
         <div className="flex flex-col relative w-full h-screen p-3 bg-gray-200">
           <Topbar yourdata={yourdata} />
-          <div className="h-full mt-2 p-3 overflow-y-auto">
+          <div className="h-full mt-5 overflow-y-auto">
             <Outlet />
           </div>
         </div>

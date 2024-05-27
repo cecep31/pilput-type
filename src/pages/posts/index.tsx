@@ -23,7 +23,7 @@ export default function Index() {
     
   }, []);
   return (
-    <div className="px-5 bg-white shadow-md py-4">
+    <div className="px-5 bg-white shadow-md py-4 rounded-lg">
       <div className="text-xl font-semibold my-3">Posts</div>
       <div>
         <Link to={"/posts/create"}>

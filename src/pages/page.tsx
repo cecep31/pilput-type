@@ -1,14 +1,12 @@
-import { Link } from "react-router-dom";
-import { countStore } from "@/stores/countStore";
+import PostWidget from "@/components/dashboard/PostsWidget";
 
 export default function Dashboard() {
-  const { count } = countStore();
   return (
     <>
       <div className="">
-        <Link className="text-blue-500" to="/">
-          count: {count}
-        </Link>
+        <div className="flex">
+          <PostWidget />
+        </div>
       </div>
     </>
   );
