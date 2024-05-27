@@ -1,6 +1,6 @@
 import cookiesjs from "js-cookie";
-import { userInterface } from "./type";
 import { axiosIntence } from './fetch'
+import { userInterface } from "@/types";
 
 export function getToken() {
   const token = cookiesjs.get("token");
