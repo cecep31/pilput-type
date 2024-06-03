@@ -1,4 +1,5 @@
 export const apibaseurl = import.meta.env.VITE_API_URL || "";
+export const apibaseurl2 = import.meta.env.VITE_API_URL_2 || "";
 export const dashbaseurl = import.meta.env.VITE_DASH_URL || "";
 export const wsbaseurl = import.meta.env.VITE_WS_URL || "";
 export const storagebaseurl = import.meta.env.VITE_STORAGE_URL || "";

@@ -55,7 +55,10 @@ const Topbar = ({ yourdata }: { yourdata: YourData }) => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link to="/profile" className="py-1 w-full flex gap-1 items-center">
+                  <Link
+                    to="/profile"
+                    className="py-1 w-full flex gap-1 items-center"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
