@@ -13,7 +13,7 @@ export const postsStore = create<PostsState>()((set) => ({
     posts: [],
     fetch: async () => {
         try {
-            const response = await axiosIntence2.get("/posts", { params: { per_page: 10 } })
+            const response = await axiosIntence2.get("/posts", { params: { limit: 10 } })
             set({ posts: response.data.data })
             set({ total: response.data.total })
         } catch (error) {
