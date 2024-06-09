@@ -1,16 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {Toaster} from 'react-hot-toast'
+import { Toaster } from "react-hot-toast";
 import "./global.css";
-import { router } from "./routes/router";
-import { RouterProvider } from "react-router-dom";
-import LogRocket from 'logrocket';
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+// import { router } from "./routes/router";
+// import { RouterProvider } from "react-router-dom";
+// import LogRocket from "logrocket";
 
+// Import the generated route tree
+import { routeTree } from "./routeTree.gen";
 
-LogRocket.init('lcw09w/pilput');
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-    <Toaster />
-  </React.StrictMode>
-);
+// Create a new router instance
+const router = createRouter({ routeTree });
+
+// Register the router instance for type safety
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
+
+// LogRocket.init("lcw09w/pilput");
+// ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+//   <React.StrictMode>
+//     <RouterProvider router={router} />
+//   </React.StrictMode>
+// );
+
+// Render the app
+const rootElement = document.getElementById("root")!;
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <RouterProvider router={router} />
+      <Toaster />
+    </React.StrictMode>
+  );
+}
