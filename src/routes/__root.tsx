@@ -1,6 +1,6 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-// import Topbar from "@/components/layouts/Topbar";
+// import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import Topbar from "@/components/layouts/Topbar";
 import { mainbaseurl } from "@/utils/getConfig";
 
 export const Route = createRootRoute({
@@ -92,14 +92,14 @@ export const Route = createRootRoute({
             </div>
           </div>
           <div className="flex flex-col relative w-full h-screen p-3 bg-gray-200">
-            {/* <Topbar yourdata={yourdata} /> */}
+            <Topbar />
             <div className="h-full mt-5 overflow-y-auto">
               <Outlet />
             </div>
           </div>
         </div>
       </main>
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </>
   ),
 });

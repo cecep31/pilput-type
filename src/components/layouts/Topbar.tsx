@@ -10,35 +10,37 @@ import { getProfilePicture } from "@/utils/getImage";
 import { Link } from "@tanstack/react-router";
 import Cookies from "js-cookie";
 import { domain, mainbaseurl } from "@/utils/getConfig";
+import { useEffect } from "react";
+import { yourStore } from "@/stores/yourData";
 
-interface YourData {
-  first_name: string;
-  last_name: string;
-  email: string;
-  image: string;
-}
+const Topbar = () => {
+  const yourstore = yourStore();
 
-const Topbar = ({ yourdata }: { yourdata: YourData }) => {
   function logout() {
     Cookies.remove("token", { path: "/", domain: `.${domain}` });
     window.location.href = mainbaseurl;
   }
+
+  useEffect(() => {
+    yourstore.fetch();
+  }, []);
+  
   return (
     <header className="w-full shadow-md bg-white dark:bg-gray-700 items-center h-16 rounded-md z-20">
       <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
         <div className="relative items-center pl-1 flex w-full sm:pr-2 sm:ml-0">
           <div className="container relative left-0 z-50 flex w-3/4 h-full">
-            <div className="flex items-center">{yourdata.first_name}</div>
+            <div className="flex items-center">{yourstore.data.first_name}</div>
           </div>
           <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
             <DropdownMenu>
               <DropdownMenuTrigger>
-                {yourdata.image ? (
+                {yourstore.data.image ? (
                   <img
                     alt="profil"
                     width={50}
                     height={50}
-                    src={getProfilePicture(yourdata.image)}
+                    src={getProfilePicture(yourstore.data.image)}
                     className="mx-auto object-cover rounded-full h-10 w-10"
                   />
                 ) : (
@@ -55,10 +57,7 @@ const Topbar = ({ yourdata }: { yourdata: YourData }) => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link
-                    to="/"
-                    className="py-1 w-full flex gap-1 items-center"
-                  >
+                  <Link to="/" className="py-1 w-full flex gap-1 items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

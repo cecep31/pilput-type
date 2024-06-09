@@ -22,3 +22,10 @@ export interface userInterface {
     image: string;
     issuperadmin: boolean;
 }
+
+export interface YourData {
+    first_name: string;
+    last_name: string;
+    email: string;
+    image: string;
+  }
