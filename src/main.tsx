@@ -1,7 +1,6 @@
+import "./global.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Toaster } from "react-hot-toast";
-import "./global.css";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 
 // Import the generated route tree
@@ -16,8 +15,6 @@ declare module "@tanstack/react-router" {
     router: typeof router;
   }
 }
-
-// LogRocket.init("lcw09w/pilput");
 // ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 //   <React.StrictMode>
 //     <RouterProvider router={router} />
@@ -31,7 +28,6 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <RouterProvider router={router} />
-      <Toaster />
     </React.StrictMode>
   );
 }

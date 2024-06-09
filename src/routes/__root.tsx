@@ -1,12 +1,13 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-// import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import Topbar from "@/components/layouts/Topbar";
 import { mainbaseurl } from "@/utils/getConfig";
+import { Toaster } from "react-hot-toast";
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <main className="relative h-screen overflow-hidden  dark:bg-gray-800">
+      <main className="relative h-screen overflow-hidden dark:bg-gray-800">
         <div className="flex items-start justify-between">
           <div className="relative hidden h-screen shadow-lg lg:block w-80   ">
             <div className="flex h-full flex-col flex-1 space-y-1 bg-zinc-800 dark:bg-gray-700 text-gray-200 p-2 text-sm">
@@ -99,7 +100,8 @@ export const Route = createRootRoute({
           </div>
         </div>
       </main>
-      {/* <TanStackRouterDevtools /> */}
+      <Toaster />
+      {process.env.NODE_ENV != "production" && <TanStackRouterDevtools />}
     </>
   ),
 });
