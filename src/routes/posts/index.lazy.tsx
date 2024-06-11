@@ -99,7 +99,7 @@ function Posts() {
       </Table>
       <div className="flex gap-2">
         <button disabled={Offset <= 0} onClick={() => setOffset((prev) => prev - limit)}>Previous</button>
-        <button onClick={() => setOffset((prev) => prev + limit)}>Next</button>
+        <button onClick={() => setOffset((prev) => prev + limit)} disabled={poststore.posts.length + Offset >= poststore.total}>Next</button>
       </div>
     </div>
   );
