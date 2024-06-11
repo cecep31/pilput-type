@@ -4,16 +4,16 @@ import { PostInterface } from '@/types'
 
 interface PostsState {
     posts: PostInterface[]
-    fetch: () => void
+    fetch: (limit : number, offset : number) => void
     error: boolean
     total: number;
 }
 
 export const postsStore = create<PostsState>()((set) => ({
     posts: [],
-    fetch: async () => {
+    fetch: async (limit = 10, offset = 0) => {
         try {
-            const response = await axiosIntence2.get("/posts", { params: { limit: 10 } })
+            const response = await axiosIntence2.get("/posts", { params: { limit: limit, offset: offset } })
             set({ posts: response.data.data })
             set({ total: response.data.total })
         } catch (error) {

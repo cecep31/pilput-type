@@ -14,7 +14,7 @@ import { postsStore } from "@/stores/postStore";
 import { getProfilePicture } from "@/utils/getImage";
 import { Link } from "@tanstack/react-router";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Days from "dayjs";
 
 export const Route = createLazyFileRoute("/posts/")({
@@ -22,10 +22,12 @@ export const Route = createLazyFileRoute("/posts/")({
 });
 
 function Posts() {
+  const limit = 10;
+  const [Offset, setOffset] = useState(0);
   const poststore = postsStore();
   useEffect(() => {
-    poststore.fetch();
-  }, []);
+    poststore.fetch(limit, Offset);
+  }, [Offset]);
   return (
     <div className="px-5 bg-white shadow-md py-4 rounded-lg">
       <div className="text-xl font-semibold my-3">Posts</div>
@@ -40,6 +42,7 @@ function Posts() {
         <TableCaption>A list of your Posts.</TableCaption>
         <TableHeader>
           <TableRow>
+            <TableHead>#</TableHead>
             <TableHead>Author</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Body</TableHead>
@@ -49,6 +52,9 @@ function Posts() {
         <TableBody>
           {poststore.posts.map((post) => (
             <TableRow key={post.id}>
+              <TableCell>
+                {(poststore.posts.indexOf(post) + 1)+Offset}
+              </TableCell>
               <TableCell>
                 <div className="flex gap-2 items-center">
                   <Avatar>
@@ -85,12 +91,16 @@ function Posts() {
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={3}>
-              {poststore.posts.length} / {poststore.total}
+            <TableCell colSpan={5}>
+              {poststore.posts.length + Offset} / {poststore.total}
             </TableCell>
           </TableRow>
         </TableFooter>
       </Table>
+      <div className="flex gap-2">
+        <button disabled={Offset <= 0} onClick={() => setOffset((prev) => prev - limit)}>Previous</button>
+        <button onClick={() => setOffset((prev) => prev + limit)}>Next</button>
+      </div>
     </div>
   );
 }
